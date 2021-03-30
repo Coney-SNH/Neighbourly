@@ -1,30 +1,91 @@
 const User = require("../models/project.model");
 
 
-// /C This function is creating a new author
+// /Create
 module.exports.createNewUser = (req, res) => {
-    // const { fullName } = req.body
     User.create(req.body)
         .then(data => res.json({ results: data }))
         .catch(err => res.json({ errors: err }));
 };
+
+module.exports.createNewTool = (req, res) => {
+    User.findOneAndUpdate({_id: req.params.id}, { $addToSet: { tools: req.body}}, {new: true, runValidators: true})
+        .then(data => res.json({results: data}))
+        .catch(err => res.json({errors: err}))
+};
+
+module.exports.createNewReview = (req, res) => {
+    User.findOneAndUpdate({_id: req.params.id}, { $addToSet: { reviews: req.body}}, {new: true, runValidators: true})
+        .then(data => res.json({results: data}))
+        .catch(err => res.json({errors: err}))
+};
+
+// Read
 module.exports.getAllUsers = (req, res) => {
     User.find()
-        .then(user => res.json(user))
+        .then(user => res.json({results: user}))
         .catch(err => res.json({ message: "Something went wrong", error: err }));
 };
+
 module.exports.getOneUser = (req, res) => {
     User.findOne({ _id: req.params.id })
         .then(findeOneUser => res.json({ user: findeOneUser }))
         .catch(err => res.json({ message: "Something went wrong", error: err }));
 };
+
+module.exports.getOneTool = (req, res) => {
+    User.findOne({"tools._id": req.params.tool_id})
+        .then(data => res.json({results: data}))
+        .catch(err => res.json({errors: err}))
+};
+
+module.exports.getAllTools = (req, res) => {
+    User.find({"tools._id": req.params.tool_id})
+        .then(data => res.json({results: data}))
+        .catch(err => res.json({errors: err}))
+};
+
+module.exports.getOneReview = (req, res) => {
+    User.findOne({"reviews._id": req.params.review_id})
+        .then(data => res.json({results: data}))
+        .catch(err => res.json({errors: err}))
+};
+
+// Update
 module.exports.updateUser = (req, res) => {
     User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true, runValidators: true })
         .then(updateUser => res.json({ user: updateUser }))
         .catch(err => res.json({ message: "Something went wrong", error: err }));
 };
+
+module.exports.updateTool = (req, res) => {
+    User.findOneAndUpdate({ "tools._id": req.params.id }, req.body, { new: true, runValidators: true })
+        .then(updateTool => res.json({ user: updateTool }))
+        .catch(err => res.json({ message: "Something went wrong", error: err }));
+};
+
+module.exports.updateReview = (req, res) => {
+    User.findOneAndUpdate({ "reviews._id": req.params.id }, req.body, { new: true, runValidators: true })
+        .then(updateReview => res.json({ user: updateReview }))
+        .catch(err => res.json({ message: "Something went wrong", error: err }));
+};
+
+
+// Delete
 module.exports.deleteUser = (req, res) => {
     User.deleteOne({ _id: req.params.id })
+        .then(user => res.json({ user: user }))
+        .catch(err => res.json({ message: "Something went wrong", error: err }));
+};
+
+module.exports.deleteTool = (req, res) => {
+    User.deleteOne({ "tools._id": req.params.id })
+        .then(user => res.json({ user: user }))
+        .catch(err => res.json({ message: "Something went wrong", error: err }));
+};
+
+module.exports.deleteReview = (req, res) => {
+    User.deleteOne({ "reviews._id": req.params.id })
         .then(user => res.json({ user: user }))
         .catch(err => res.json({ message: "Something went wrong", error: err }));
 };
