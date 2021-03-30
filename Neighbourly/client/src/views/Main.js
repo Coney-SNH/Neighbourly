@@ -25,13 +25,13 @@ export default props => {
         <th > Actions </th> 
         </tr> 
         {allusers.map((user, index) => {
-                return 
-                    <tr key = { index.id }>
+                return (
+                    <tr key = { index }>
                     <td> {user.firstName} {user.lastName} </td>
                     <td > { user.type } </td>
-                    <td > < Link to = { `/users/${user._id}` } > < button> Details </button></Link > | < Link to = { `/user/${user._id}/edit` } > < button > Edit </button></Link >
+                    <td > < Link to = { `/users/${user._id}` } > < button> Details </button></Link > | < Link to = { `/user/${user._id}/edit` } > <button> Edit </button></Link >
                     </td> 
-                    </tr>
+                    </tr>)
             })
         } 
         </table> 
