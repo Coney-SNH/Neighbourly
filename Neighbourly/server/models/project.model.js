@@ -6,12 +6,12 @@ const bcrypt = require('bcrypt');
 
 
 const UserSchema = new mongoose.Schema({
-    userName: {
-        type: String,
-        required: [true, "A unique username is required"],
-        unique: [true, "A user by that username already exists"],
-        minlength: [2, "Your username must be at least 3 characters long"]
-    },
+    // userName: {
+    //     type: String,
+    //     required: [true, "A unique username is required"],
+    //     unique: [true, "A user by that username already exists"],
+    //     minlength: [2, "Your username must be at least 3 characters long"]
+    // },
     firstName: {
         type: String,
         required: [true, "A first name is required"],
@@ -36,29 +36,29 @@ const UserSchema = new mongoose.Schema({
         minlength: [8, "Your password must be at least 8 characters in length"]
     },
 
-    address: {
-        street: {
-            type: String,
-            required: [true, "You need a valid street address"],
-            minlength: [2, "Your street address should be longer than that"]
-        },
-        city: {
-            type: String,
-            required: [true, "Please input a valid city name"],
-            minLength: [3, "You must enter a valid city name."]
-        },
-        state: {
-            type: String,
-            required: [true, "You must enter a state"],
-            minLength: [2, "You must choose a two letter state name"],
-            maxLength: [2, "You must choose a two letter state name"]
-        }, 
-        zipcode: {
-            type: Number,
-            required: [true, "You must enter a zipcode"],
-            minLength: [5, "You must enter a valid zipcode"]
-        }
-    },
+    // address: {
+    //     street: {
+    //         type: String,
+    //         required: [true, "You need a valid street address"],
+    //         minlength: [2, "Your street address should be longer than that"]
+    //     },
+    //     city: {
+    //         type: String,
+    //         required: [true, "Please input a valid city name"],
+    //         minLength: [3, "You must enter a valid city name."]
+    //     },
+    //     state: {
+    //         type: String,
+    //         required: [true, "You must enter a state"],
+    //         minLength: [2, "You must choose a two letter state name"],
+    //         maxLength: [2, "You must choose a two letter state name"]
+    //     }, 
+    //     zipcode: {
+    //         type: Number,
+    //         required: [true, "You must enter a zipcode"],
+    //         minLength: [5, "You must enter a valid zipcode"]
+    //     }
+    // },
 
     tools: [ToolSchema],
     
@@ -66,26 +66,28 @@ const UserSchema = new mongoose.Schema({
 
 }, { timestamps: true });
 
-const User = mongoose.model("User", UserSchema);
-module.exports = User;
+// near the top is a good place to group our imports
 
+// this should go after 
+UserSchema.pre('save', function (next) {
+    bcrypt.hash(this.password, 10)
+        .then(hash => {
+            this.password = hash;
+            next();
+        });
+});
 // add this after UserSchema is defined
 UserSchema.virtual('confirmPassword')
-    .get( () => this._confirmPassword )
-    .set( value => this._confirmPassword = value );
+    .get(() => this._confirmPassword)
+    .set(value => this._confirmPassword = value);
 
-UserSchema.pre('validate', function(next) {
+UserSchema.pre('validate', function (next) {
     if (this.password !== this.confirmPassword) {
         this.invalidate('confirmPassword', 'Password must match confirm password');
     }
     next();
 });
 
-UserSchema.pre('save', function(next) {
-    bcrypt.hash(this.password, 10)
-        .then(hash => {
-            this.password = hash;
-        next();
-    });
-});
-    
+
+const User = mongoose.model("User", UserSchema);
+module.exports = User;
