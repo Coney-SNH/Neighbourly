@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
+import { navigate } from '@reach/router';
+
 import {
-    Paper,
     FormControl,
     InputLabel,
     OutlinedInput,
@@ -21,23 +22,47 @@ const styles = {
     }
 }
 export default  (props)=> {
-    const{user}=props;
+    const{user, Users}=props;
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
-    const [userName, setUserName]= useState("");
+    // const [userName, setUserName]= useState("");
     const [email, setEmail] = useState("");
+    const [logEmail, setLogEmail] = useState("");
     const [address, setAddress] = useState("");
     const [password, setPassword] = useState("");
+    const [logPassword, setLogPassword] = useState("");
     const [confirmPassword, setConfirmPassword] = useState("");
+    const [errors, setErrors] = useState({});
+// ***********************************Login********************************************
 
+        function validateForm() {
+            return email.length > 0 && password.length > 0;
+        };
 
+        function handleSubmit(event) {
+            event.preventDefault();
+            axios.post('http://localhost:8000/api/user/login',{
+                logEmail,
+                logPassword
+            })
+                .then(response => {
+                    console.log(response);
+                    if (response.data.errors) {
+                        setErrors(response.data.errors.errors)
+                    } else { navigate("/homepage") }
+                })
+                .catch(err => console.log(err))
+        }
+
+// ******************************************************************************
+
+    {console.log("**************************")}
     const onSubmitHandler = e => {
         e.preventDefault();
-        // User.create(e)
             axios.post('http://localhost:8000/api/user', {
                 firstName,
                 lastName,
-                userName,
+              // userName,
                 email,
                 address,
                 password,
@@ -47,38 +72,32 @@ export default  (props)=> {
                 if (response.data.message === "error"){
                     console.log("There is an error");
                 } else {
-                    console.log({ msg: "success!", user: user })
+                    console.log(response)
+                    console.log({ msg: "success!", user: response})
+                    navigate("/homepage")
                 }
             })
             .catch(err => console.log(err))
-    };
-{console.log("**************************")}
+        };
+// ********************************************************** Google MAP API******************************
+
+    // function initMap() {
+    //         axios.get ("https://maps.google.com/?cid=10281119596374313554",)
+    //     const map = new google.maps.Map(document.getElementById("map"), {
+    //         zoom: 8,
+    //         center: { lat: 35.717, lng: 139.731 },
+    //     });
+    // }
+// ************************************************************************************************************
+
 return (
     <div  elevation={1} style={styles.paper}>
-        <h2>Login</h2>
-        <form>
-            <FormControl variant="outlined" style={styles.input}>
-                <InputLabel>User Name</InputLabel>
-                <OutlinedInput type="text" name="firstName"/>
-            </FormControl>
-            <FormControl variant="outlined" style={styles.input}>
-                <InputLabel>E-mail</InputLabel>
-                <OutlinedInput type="email" name="email"/>
-            </FormControl>
-            <FormControl variant="outlined" style={styles.input}>
-                <InputLabel>Password</InputLabel>
-                <OutlinedInput type="password" name="password"/>
-            </FormControl>
-            <FormControl>
-                <Checkbox label='I agree to the Terms and Conditions'/>
-            </FormControl>
-            <Button type="submit" variant="contained" color="primary">
-                Login
-            </Button>
-        </form>
+        {/* *************************** */}
+
+        {/* *************************** */}
         
-        <h2>Register</h2>
-        <form onChange = {onSubmitHandler}>
+        <h2>Register{JSON.stringify(firstName)}</h2>
+        <form onSubmit = {onSubmitHandler}>
             <FormControl variant="outlined" style={styles.input}>
                 <InputLabel>First Name</InputLabel>
                 <OutlinedInput type="text" name="firstName" onChange={(e) => setFirstName(e.target.value)}
@@ -89,11 +108,6 @@ return (
                 <OutlinedInput type="text" name="lastName" onChange={(e) => setLastName(e.target.value)}
                         value={lastName}/>
                 </FormControl>
-            <FormControl variant="outlined">
-                <InputLabel>User Name</InputLabel>
-                <OutlinedInput type="text" name="userName" onChange={(e) => setUserName(e.target.value)}
-                    value={userName} />
-            </FormControl>
             <FormControl variant="outlined" style={styles.input}>
                 <InputLabel>E-mail</InputLabel>
                 <OutlinedInput type="text" name="email" onChange={(e) => setEmail(e.target.value)}
@@ -110,13 +124,29 @@ return (
             </FormControl>
             <FormControl variant="outlined" style={styles.input}>
                 <InputLabel>Address</InputLabel>
-                <OutlinedInput type="text" name="address" />
+                <OutlinedInput type="text" name="address" onChange={(e) => setAddress(e.target.value)} value={address} />
             </FormControl>
             <Button type="submit" variant="contained" color="primary">Register
             </Button>
         </form>
-        {console.log(firstName)}
+        <h2>Login</h2>
+        <form onSubmit={handleSubmit}>
+            <FormControl variant="outlined" style={styles.input}>
+                <InputLabel>Email</InputLabel>
+                <OutlinedInput type="email" name="email" onChange={(e) => setLogEmail(e.target.value)} value={logEmail}/>
+            </FormControl>
+            <FormControl variant="outlined" style={styles.input}>
+                <InputLabel>Password</InputLabel>
+                <OutlinedInput type="password" name="password" onChange={(e) => setLogPassword(e.target.value)}value={logPassword}/>
+            </FormControl>
+            <FormControl>
+                <Checkbox label='I agree to the Terms and Conditions'/>
+            </FormControl>
+            <Button type="submit" variant="contained" color="primary">
+                Login
+            </Button>
+        </form>
     </div>
-  )
+    )
 }
 
