@@ -80,6 +80,4 @@ app.post('/webhook', bodyParser.raw({type: 'application/json'}), (request, respo
     response.send();
 });
 
-
-
 app.listen(8000, () => console.log("Now listening on port 8000"));
