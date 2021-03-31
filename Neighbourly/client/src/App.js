@@ -14,8 +14,13 @@ import Detail from './views/User/UserDetail';
 import Edit from './views/User/UserEdit';
 // import Edit from './views/Tool/ToolEdit';
 // import Edit from './views/Review/ReviewEdit';
+//Stripe imports
+import { loadStripe } from "@stripe/stripe-js";
+import { Elements } from "@stripe/react-stripe-js";
 
 import './App.css';
+
+const promise = loadStripe("pk_test_51IalToAQmXzgarKriNlG0enhbeYqakTPb3e8GyHE6mbNLEIZMACg8k5J0Ul8GPk9nFEsbuyBAUzhCMF5AELLp0CZ003isiZgwB");
 
 function App(props) {
     const [allusers, setAllUsers] = useState([]);
@@ -36,6 +41,9 @@ function App(props) {
         {/* <DetailTool path = "/users/:id/detail_tool" />
         <DetailReview path = "/users/:id/detail_review" /> */}
 
+        <Elements stripe={promise} >
+            <CheckoutForm path="/users/:id/checkout" />
+        </Elements>
 
 
         </Router>
