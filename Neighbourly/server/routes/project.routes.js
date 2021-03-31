@@ -15,9 +15,8 @@ module.exports = app => {
     app.put("/api/user/:id", ProjectController.updateUser);
     app.put("/api/tool/:id", ProjectController.updateTool);
     app.put("/api/review/:id", ProjectController.updateReview);
+    app.put("/api/tool/:id/:tool_id", ProjectController.deleteTool);
+    app.put("/api/review/:id/:review_id", ProjectController.deleteReview);
     // Delete
     app.delete("/api/user/:id", ProjectController.deleteUser);
-    app.delete("/api/tool/:id", ProjectController.deleteTool);
-    app.delete("/api/review/:id", ProjectController.deleteReview);
-
 };

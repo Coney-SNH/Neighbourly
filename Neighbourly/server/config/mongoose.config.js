@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 
-mongoose.connect("mongodb://localhost/projectdb", {
+mongoose.connect("mongodb://localhost/neighborlydb", {
         useNewUrlParser: true,
         useUnifiedTopology: true,
         useFindAndModify: false,
