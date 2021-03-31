@@ -1,6 +1,8 @@
+// Create
 import Create from './views/Create';
+import CreateTool from './views/Tool/ToolCreate';
 import Main from './views/Main';
-import UserDetail from './views/UserDetail';
+import Detail from './views/Detail';
 import ToolDetail from './views/ToolDetail';
 import Connect from './views/Connect';
 import Payments from './views/Payments';
@@ -21,8 +23,9 @@ function App(props) {
         <LoginRegister path = "/"/>
         <Main path = "/homepage"/>
         <Create path = "/user/new" />
+        <CreateTool path="/user/:id/new_tool"/>
         <Edit path = "/user/:id/edit" />
-        <UserDetail path = "/users/:id" />
+        <Detail path = "/users/:id" />
         <ToolDetail path = "/tool/:id"/>
         <Connect path = "/user/:id/connect"/>
         <Payments path = "/user/:id/checkout"/>

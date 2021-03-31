@@ -80,12 +80,21 @@ export default  (props)=> {
 // ********************************************************** Google MAP API******************************
 
     // function initMap() {
-    //         axios.get ("https://maps.google.com/?cid=10281119596374313554",)
+    //         axios.get (`https://maps.google.com/?cid=10281119596374313554`,)
     //     const map = new google.maps.Map(document.getElementById("map"), {
     //         zoom: 8,
     //         center: { lat: 35.717, lng: 139.731 },
     //     });
     // }
+    // function myMap() {
+    //     var mapProp = {
+    //         axios.get(`https://maps.google.com/?cid=10281119596374313554`)
+    //                 const map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
+    //         center: new google.maps.LatLng(51.508742, -0.120850),
+    //         zoom: 5,
+    //     };
+    // }
+
 // ************************************************************************************************************
 
 return (
@@ -93,7 +102,7 @@ return (
         {/* *************************** */}
 
         {/* *************************** */}
-        
+
         <h2>Register{JSON.stringify(firstName)}</h2>
         <form onSubmit = {onSubmitHandler}>
             <FormControl variant="outlined" style={styles.input}>

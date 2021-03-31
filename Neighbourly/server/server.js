@@ -10,7 +10,7 @@ app.use(express.urlencoded({ extended: true }));
 
 require('./config/mongoose.config');
 require('./routes/project.routes')(app);
-require('./routes/project.routes')(app);
+// require('./routes/project.routes')(app);
 app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 
 app.listen(8000, () => console.log("Now listening on port 8000"));
