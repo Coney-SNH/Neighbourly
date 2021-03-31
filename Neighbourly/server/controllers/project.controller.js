@@ -1,13 +1,50 @@
 const User = require("../models/project.model");
-
+const bcrypt = require('bcrypt');
+const jwt = require("jsonwebtoken");
+require('dotenv').config();
+const SECRET_KEY = process.env.SECRET_KEY
 
 // /C This function is creating a new author
 module.exports.createNewUser = (req, res) => {
-    // const { fullName } = req.body
     User.create(req.body)
-        .then(data => res.json({ results: data }))
-        .catch(err => res.json({ errors: err }));
+        .then(user => {
+            console.log(user)
+            const userToken = jwt.sign({
+                id: user._id
+            }, SECRET_KEY);
+            res
+                .cookie("usertoken", userToken, secret, {
+                    httpOnly: true
+                })
+                .json({ msg: "success!", user: user });
+        })
+        .catch(err => res.json(err));
 };
+module.exports.loginUser = async(req, res) => {
+    console.log(SECRET_KEY)
+    const user = await User.findOne({ email: req.body.logEmail });
+    console.log(user)
+    if (user === null) {
+        // email not found in users collection
+        return res.sendStatus(400);
+    }
+    // if we made it this far, we found a user with this email address
+    // let's compare the supplied password to the hashed password in the database
+    const correctPassword = await bcrypt.compare(req.body.logPassword, user.password);
+    if (!correctPassword) {
+        // password wasn't a match!
+        return res.sendStatus(400);
+    }
+    // if we made it this far, the password was correct
+    const userToken = jwt.sign({
+        id: user._id
+    }, SECRET_KEY);
+    // note that the response object allows chained calls to cookie and json
+    res.cookie("usertoken", userToken, SECRET_KEY, {
+            httpOnly: true
+        })
+        .json({ msg: "success!" });
+}
 module.exports.getAllUsers = (req, res) => {
     User.find()
         .then(user => res.json(user))
@@ -28,4 +65,4 @@ module.exports.deleteUser = (req, res) => {
         .then(user => res.json({ user: user }))
         .catch(err => res.json({ message: "Something went wrong", error: err }));
 };
-// to add on the nested schema   add to the updateUser controller {$addToSet:{quotes: req.body}}
+// to add on the nested schema   add to the updateUser controller {$addToSet:{quotes: req.body}}()

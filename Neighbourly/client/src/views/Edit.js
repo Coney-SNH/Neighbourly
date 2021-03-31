@@ -13,7 +13,7 @@ export default props => {
     // const [skills, setSkills] = useState("");
     const [loaded, setLoaded] = useState(false);
     const [errors, setErrors] = useState({});
-    const { user } =props
+    // const { user } =props
 
     useEffect(() => {
         axios.get(`http://localhost:8000/api/user/` + props.id)
@@ -49,7 +49,7 @@ export default props => {
     }
     return (
         <div>
-            <h3> Edit {user.firstName}{user.lastName} </h3>
+            <h3> Edit {firstName}{lastName} </h3>
 
             <form onSubmit={updateUser} >
                 <Link to={`/`}> Home </Link><br />

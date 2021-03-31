@@ -1,6 +1,12 @@
+// Create
 import Create from './views/Create';
+import CreateTool from './views/Tool/ToolCreate';
 import Main from './views/Main';
 import Detail from './views/Detail';
+import ToolDetail from './views/ToolDetail';
+import Connect from './views/Connect';
+import Payments from './views/Payments';
+import LoginRegister from './views/LoginRegister';
 import { Link } from '@reach/router';
 import { Router } from '@reach/router';
 import React, { useState } from 'react';
@@ -10,13 +16,19 @@ import './App.css';
 function App(props) {
     const [allusers, setAllUsers] = useState([]);
 
-    return ( <div className = "App">
-        <h1 > Neighborly </h1>
-        <Router>
-        <Main path = "/" />
+    return ( < div className = "App">
+        <h1> Neighborly </h1> 
+        <Link to = { `/` } > back to home </Link> <br/>
+        <Router >
+        <LoginRegister path = "/"/>
+        <Main path = "/homepage"/>
         <Create path = "/user/new" />
+        <CreateTool path="/user/:id/new_tool"/>
         <Edit path = "/user/:id/edit" />
         <Detail path = "/users/:id" />
+        <ToolDetail path = "/tool/:id"/>
+        <Connect path = "/user/:id/connect"/>
+        <Payments path = "/user/:id/checkout"/>
         </Router>
         </div>
     );

@@ -31,13 +31,13 @@ export default props => {
     const deleteUser = (userId) => {
         axios.delete(`http://localhost:8000/api/user/` + userId)
             .then(res => {
-                navigate('/')
+                navigate('/homepage')
             })
     }
     return (
         <div>
             <h2>Details for {firstName}{lastName}</h2>
-            <Link to={`/`}> Home </Link><br />
+            <Link to={`/homepage`}> Home </Link><br />
 
             <label htmlFor="First Name" >First Name: {firstName}</label>
             <br />
