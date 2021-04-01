@@ -5,15 +5,23 @@ import { Link } from '@reach/router';
 export default props => {
     const [allusers, setAllUsers] = useState([]);
     const [tools, setTools] = useState([]);
+    const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         Axios.get(`http://localhost:8000/api/user`)
             .then(res => {
                 console.log("**********", res)
-                setAllUsers(res.data)
+                setAllUsers(res.data.results)
+                setLoading(false)
             })
             .catch(err => console.log(err))
     }, []);
+
+    if(loading){
+        return(
+            <p>Loading....</p>
+        )
+    }
 
     return (
         <div >

@@ -4,9 +4,9 @@ import {
     useStripe,
     useElements
 } from "@stripe/react-stripe-js";
-// import "./Stripe.css";
+import "./Stripe.css";
 
-const Payments = () => {
+export default function CheckoutForm() {
     const [succeeded, setSucceeded] = useState(false);
     const [error, setError] = useState(null);
     const [processing, setProcessing] = useState('');
@@ -79,10 +79,12 @@ const Payments = () => {
     };
 
     return (
-        <form id="payment-form" onSubmit={handleSubmit}>
-            <input type="text" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter email address" />
+        <>
+        <div class="body">
+        <form id="payment-form" class="form" onSubmit={handleSubmit}>
+            <input type="text" class="input" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter email address" />
             <CardElement id="card-element" options={cardStyle} onChange={handleChange} />
-            <button disabled={processing || disabled || succeeded} id="submit">
+            <button disabled={processing || disabled || succeeded} id="submit" class="button">
                 <span id="button-text">
                     {processing ? (
                         <div className="spinner" id="spinner"></div>
@@ -104,7 +106,7 @@ const Payments = () => {
                 Refresh the page to pay again.
             </p>
         </form>
+        </div>
+        </>
     );
 }
-export default Payments;
-
