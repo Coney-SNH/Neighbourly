@@ -26,7 +26,7 @@ const ToolCreate = (props) => {
                 console.log(res);
                 if (res.data.errors) {
                     setErrors(res.data.errors)
-                } else { navigate("/homepage") }
+                } else { navigate(`/user/${props._id}`) }
             })
             .catch(err => console.log(err))
     }
@@ -50,13 +50,14 @@ const ToolCreate = (props) => {
                 <input type="number" name="price" onChange={(e) => setPrice(e.target.value)} value={price} />
                 <span > {errors.price ? errors.price.message : ''} </span></p>
                 
-                <p><label htmlFor="startDate"> Start Date: </label><br />
-                <input type="date" name="price" onChange={(e) => setStartDate(e.target.value)} value={startDate} />
+                <p><label htmlFor="startDate"> When will the tool be available: </label><br />
+                <input type="date" name="startDate" onChange={(e) => setStartDate(e.target.value)} value={startDate} />
                 <span > {errors.startDate ? errors.startDate.message : ''} </span></p>
-
-                <p><label htmlFor="endDate"> End Date: </label><br />
+                
+                <p><label htmlFor="endDate"> When will you need the tool back by: </label><br />
                 <input type="date" name="endDate" onChange={(e) => setEndDate(e.target.value)} value={endDate} />
                 <span > {errors.endDate ? errors.endDate.message : ''} </span></p>
+                
                 <input type="submit" value="Add New Tool" />
             </form>
         </div>

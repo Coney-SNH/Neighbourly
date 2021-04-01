@@ -20,8 +20,9 @@ const calculateOrderAmount = items => {
     var total = 0;
     total = total + items
 
-    return 1000;
+    return 1200;
 };
+
 app.post("/create-payment-intent", async (req, res) => {
     const { items } = req.body;
     // Create a PaymentIntent with the order amount and currency
@@ -81,4 +82,18 @@ require('./routes/project.routes')(app);
 // require('./routes/project.routes')(app);
 app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 
-app.listen(8000, () => console.log("Now listening on port 8000"));
+const server = app.listen(8000, () => console.log("Now listening on port 8000"));
+
+const io = require('socket.io')(server, { cors: true })
+
+io.on('connection', socket => {
+    
+    socket.on('sendMessage', data => {
+        socket.emit('messageSent', data);
+    })
+
+    socket.on('clientTyping', data => {
+        socket.emit('clientTyping', data);
+    })
+    
+})

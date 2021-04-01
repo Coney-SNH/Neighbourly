@@ -46,9 +46,9 @@ function App(props) {
             <ReviewDetail path = "/user/:id/review/:id"/>
 
             <Connect path = "/user/:id/connect"/>
-            <CheckoutForm2 path = "/user/:id/checkout"/>
-            <CheckoutForm2 path="/checkout"/>
             <Payments path= "/user/:id/payments"/>
+            <CheckoutForm2 path = "/user/:_id/tool/:tool_id/checkout"/>
+            <CheckoutForm2 path= "checkout"/>
         </Router>
         </div>
     );

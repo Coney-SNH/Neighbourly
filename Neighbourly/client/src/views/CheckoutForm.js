@@ -5,8 +5,10 @@ import {
     useElements
 } from "@stripe/react-stripe-js";
 import "./Stripe.css";
+import axios from 'axios';
 
-export default function CheckoutForm() {
+
+export default function CheckoutForm(props) {
     const [succeeded, setSucceeded] = useState(false);
     const [error, setError] = useState(null);
     const [processing, setProcessing] = useState('');
@@ -15,10 +17,33 @@ export default function CheckoutForm() {
     const [email, setEmail] = useState('');
     const stripe = useStripe();
     const elements = useElements();
+    const [loading, setLoading] = useState(true);
+    const [thisUser, setThisUser] = useState({})
+    const [thisTool, setThisTool] = useState({})
+    const { user, tool } = props;
+
+    useEffect(() => {
+        axios.get(`http://localhost:8000/api/user/${user}`)
+            .then(res => {
+                console.log(res);
+                setThisUser(res.data.user);
+                // setThisTool(res.data.user.tools);
+                setLoading(false);
+            })
+            .catch(err => console.log(err))
+    }, []);
+
+    useEffect(()=> {
+        axios.get(`http://localhost:8000/api/tool/${tool}`)
+            .then(res => {
+                console.log(res);
+                setThisTool(res.data.results);
+            })
+    }, []);
 
     useEffect(() => {
         // Create PaymentIntent as soon as the page loads
-        window.fetch("/create-payment-intent", {
+        window.fetch("http://localhost:8000/create-payment-intent", { //api/userid/toolid/
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -78,11 +103,25 @@ export default function CheckoutForm() {
         }
     };
 
+    console.log(thisTool);
+
+    if (loading) {
+        return (
+            <p>Loading....</p>
+        )
+    }
+
     return (
         <>
-        <div class="body">
+        <div>
+            <h3>Confirmation</h3>
+            <p>You are about to rent the {thisTool.type}</p>
+            <p>from {thisUser.firstName} {thisUser.lastName}</p>
+            <p>for ${thisTool.price} a day.</p>
+            <br/>
+            <h4>If this is correct, please enter your card information below</h4>
         <form id="payment-form" class="form" onSubmit={handleSubmit}>
-            <input type="text" class="input" value={email} onChange={(e) => setEmail(e.target.value)} placeholder="Enter email address" />
+            <input type="text" class="input" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={thisUser.email} />
             <CardElement id="card-element" options={cardStyle} onChange={handleChange} />
             <button disabled={processing || disabled || succeeded} id="submit" class="button">
                 <span id="button-text">

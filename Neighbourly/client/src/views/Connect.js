@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, navigate } from '@reach/router';
+import Chat from '../components/Chat';
+
 
 const Connect = (props) => {
     const [firstName, setFirstName] = useState("");
@@ -25,6 +27,7 @@ const Connect = (props) => {
             })
             .catch(err => console.log(err.message))
     }, []);
+
 
     return (
         <div>
