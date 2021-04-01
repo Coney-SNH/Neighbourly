@@ -38,6 +38,11 @@ const UserSchema = new mongoose.Schema({
         type: String,
         required: [true, "A password is required"],
         minlength: [8, "Your password must be at least 8 characters in length"]
+    },
+    address: {
+        type: String,
+        required: [true, "You must have an address"],
+        minLength: [3, "Please provide a longer address"]
     }, 
     // address: {
     //     street: {

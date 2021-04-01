@@ -6,6 +6,8 @@ const ToolCreate = (props) => {
     const [type, setType] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState(0);
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
     const [errors, setErrors] = useState({});
     const [user, setUser] = useState({});
 
@@ -13,16 +15,18 @@ const ToolCreate = (props) => {
     const onSubmitHandler = (e) => {
         e.preventDefault();
         //make a post request to create a new tool`
-        axios.post(`http://localhost:8000/api/user/$_id/tool`, {
+        axios.post(`http://localhost:8000/api/user/${props._id}/tool`, {
             type,
             description,
-            price
+            price,
+            startDate,
+            endDate
         })
             .then(res => {
                 console.log(res);
                 if (res.data.errors) {
                     setErrors(res.data.errors)
-                } else { navigate("/") }
+                } else { navigate(`/user/${props._id}`) }
             })
             .catch(err => console.log(err))
     }
@@ -45,6 +49,14 @@ const ToolCreate = (props) => {
                 <p><label htmlFor="price"> Price: </label><br />
                 <input type="number" name="price" onChange={(e) => setPrice(e.target.value)} value={price} />
                 <span > {errors.price ? errors.price.message : ''} </span></p>
+                
+                <p><label htmlFor="startDate"> When will the tool be available: </label><br />
+                <input type="date" name="startDate" onChange={(e) => setStartDate(e.target.value)} value={startDate} />
+                <span > {errors.startDate ? errors.startDate.message : ''} </span></p>
+                
+                <p><label htmlFor="endDate"> When will you need the tool back by: </label><br />
+                <input type="date" name="endDate" onChange={(e) => setEndDate(e.target.value)} value={endDate} />
+                <span > {errors.endDate ? errors.endDate.message : ''} </span></p>
                 
                 <input type="submit" value="Add New Tool" />
             </form>

@@ -72,19 +72,25 @@ module.exports.getOneUser = (req, res) => {
 };
 
 module.exports.getOneTool = (req, res) => {
-    User.findOne({"tools._id": req.params.tool_id})
-        .then(data => res.json({results: data}))
+    User.findOne({"tools._id": req.params.id})
+        .then(data => res.json({message: "Success", results: data.tools.filter(item => item._id == req.params.id)[0]}))
+        .catch(err => res.json({errors: err}))
+};
+
+module.exports.getOneToolPrice = (req, res) => {
+    User.findOne({"tools._id": req.params.id})
+        .then(data => res.json({message: "Success", results: data.tools.filter(item => item._id == req.params.id)[0].price}))
         .catch(err => res.json({errors: err}))
 };
 
 module.exports.getAllTools = (req, res) => {
-    User.find({"tools._id": req.params.tool_id})
+    User.find({"tool._id": req.params.tool_id})
         .then(data => res.json({results: data}))
         .catch(err => res.json({errors: err}))
 };
 
 module.exports.getOneReview = (req, res) => {
-    User.findOne({"reviews._id": req.params.review_id})
+    User.findOne({"review._id": req.params.review_id})
         .then(data => res.json({results: data}))
         .catch(err => res.json({errors: err}))
 };
