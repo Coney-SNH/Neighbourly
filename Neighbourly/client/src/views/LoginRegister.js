@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { navigate } from '@reach/router';
+import Map from './Map';
 
 import {
     FormControl,
@@ -100,7 +101,7 @@ export default  (props)=> {
 return (
     <div  elevation={1} style={styles.paper}>
         {/* *************************** */}
-
+<Map/>
         {/* *************************** */}
 
         <h2>Register{JSON.stringify(firstName)}</h2>
