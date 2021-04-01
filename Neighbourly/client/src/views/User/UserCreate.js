@@ -1,6 +1,15 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, navigate } from '@reach/router';
+import {
+    FormControl,
+    InputLabel,
+    OutlinedInput,
+    Checkbox,
+    Select,
+    Button
+} from '@material-ui/core';
+
 
 
 export default (props) => {
@@ -35,7 +44,7 @@ export default (props) => {
     return (
         <div>
             <h3> Know a user needing a home ? </h3>
-            <Link to={`/`} > back to home </Link><br />
+            <Link to={`/homepage`} > back to home </Link><br />
             <form onSubmit={onSubmitHandler} ><br/>
                 <label htmlFor="First Name" >First Name: </label>
                 <input type="text" name="firstName" onChange={(e) => setFirstName(e.target.value)}

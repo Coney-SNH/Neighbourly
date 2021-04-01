@@ -13,14 +13,18 @@ import React, { useState, useEffect } from 'react';
 import Edit from './views/Edit';
 import './App.css';
 import CheckoutForm2 from './views/CheckoutForm2';
+import img from './Neighbourly.PNG';
 
 function App(props) {
     const [allusers, setAllUsers] = useState([]);
 
     return ( 
     < div className = "App">
-        <h1> Neighborly </h1> 
-        <Link to = { `/homepage` } > Back to Home </Link> <br/>
+        <div>
+            <img src={img} style={{width: '50px', height: '50px', display: 'inline-block'}}/>
+            <h1 style={{display: 'inline-block'}}>Neighborly</h1> 
+        </div>
+        {/* <Link to = { `/homepage` } > Back to Home </Link> <br/> */}
         <Router >
             <LoginRegister path = "/"/>
             <Main path = "/homepage"/>

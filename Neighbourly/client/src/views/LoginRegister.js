@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { navigate } from '@reach/router';
-import Map from './Map';
+// import Map from './Map';
 
 import {
     FormControl,
@@ -10,10 +10,11 @@ import {
     Select,
     Button
 } from '@material-ui/core';
+
 import axios from "axios";
 const styles = {
     paper: {
-        width: "10rem", padding: "1rem"
+        width: "12rem", padding: "1rem", display: "inline-block", verticalAlign: 'text-top'
     },
     input: {
         marginBottom: "1rem"
@@ -99,61 +100,64 @@ export default  (props)=> {
 // ************************************************************************************************************
 
 return (
-    <div  elevation={1} style={styles.paper}>
+    <div style={{margin: '0 auto'}}>
+        <div  elevation={1} style={styles.paper}>
         {/* *************************** */}
-<Map/>
+{/* <Map/> */}
         {/* *************************** */}
-
-        <h2>Register{JSON.stringify(firstName)}</h2>
-        <form onSubmit = {onSubmitHandler}>
-            <FormControl variant="outlined" style={styles.input}>
-                <InputLabel>First Name</InputLabel>
-                <OutlinedInput type="text" name="firstName" onChange={(e) => setFirstName(e.target.value)}
-                        value={firstName}/>
-            </FormControl>
+            <h2>Register{JSON.stringify(firstName)}</h2>
+            <form onSubmit = {onSubmitHandler}>
                 <FormControl variant="outlined" style={styles.input}>
-                    <InputLabel>Last Name</InputLabel>
-                <OutlinedInput type="text" name="lastName" onChange={(e) => setLastName(e.target.value)}
-                        value={lastName}/>
+                    <InputLabel>First Name</InputLabel>
+                    <OutlinedInput type="text" name="firstName" onChange={(e) => setFirstName(e.target.value)}
+                            value={firstName}/>
                 </FormControl>
-            <FormControl variant="outlined" style={styles.input}>
-                <InputLabel>E-mail</InputLabel>
-                <OutlinedInput type="text" name="email" onChange={(e) => setEmail(e.target.value)}
-                    value={email} />
-            </FormControl>
-            <FormControl variant="outlined" style={styles.input}>
-                <InputLabel>Password</InputLabel>
-                <OutlinedInput type="password" name="password" onChange={(e) => setPassword(e.target.value)}
-                        value={password} />
-            </FormControl>
-            <FormControl variant="outlined" style={styles.input}>
-                <InputLabel> Confirm Password</InputLabel>
-                <OutlinedInput type="password" name="Confirmpassword" onChange={(e)=> setConfirmPassword(e.target.value)} value={confirmPassword}/>
-            </FormControl>
-            <FormControl variant="outlined" style={styles.input}>
-                <InputLabel>Address</InputLabel>
-                <OutlinedInput type="text" name="address" onChange={(e) => setAddress(e.target.value)} value={address} />
-            </FormControl>
-            <Button type="submit" variant="contained" color="primary">Register
-            </Button>
-        </form>
-        <h2>Login</h2>
-        <form onSubmit={handleSubmit}>
-            <FormControl variant="outlined" style={styles.input}>
-                <InputLabel>Email</InputLabel>
-                <OutlinedInput type="email" name="email" onChange={(e) => setLogEmail(e.target.value)} value={logEmail}/>
-            </FormControl>
-            <FormControl variant="outlined" style={styles.input}>
-                <InputLabel>Password</InputLabel>
-                <OutlinedInput type="password" name="password" onChange={(e) => setLogPassword(e.target.value)}value={logPassword}/>
-            </FormControl>
-            <FormControl>
-                <Checkbox label='I agree to the Terms and Conditions'/>
-            </FormControl>
-            <Button type="submit" variant="contained" color="primary">
-                Login
-            </Button>
-        </form>
+                    <FormControl variant="outlined" style={styles.input}>
+                        <InputLabel>Last Name</InputLabel>
+                    <OutlinedInput type="text" name="lastName" onChange={(e) => setLastName(e.target.value)}
+                            value={lastName}/>
+                    </FormControl>
+                <FormControl variant="outlined" style={styles.input}>
+                    <InputLabel>E-mail</InputLabel>
+                    <OutlinedInput type="text" name="email" onChange={(e) => setEmail(e.target.value)}
+                        value={email} />
+                </FormControl>
+                <FormControl variant="outlined" style={styles.input}>
+                    <InputLabel>Password</InputLabel>
+                    <OutlinedInput type="password" name="password" onChange={(e) => setPassword(e.target.value)}
+                            value={password} />
+                </FormControl>
+                <FormControl variant="outlined" style={styles.input}>
+                    <InputLabel> Confirm Password</InputLabel>
+                    <OutlinedInput type="password" name="Confirmpassword" onChange={(e)=> setConfirmPassword(e.target.value)} value={confirmPassword}/>
+                </FormControl>
+                <FormControl variant="outlined" style={styles.input}>
+                    <InputLabel>Address</InputLabel>
+                    <OutlinedInput type="text" name="address" onChange={(e) => setAddress(e.target.value)} value={address} />
+                </FormControl>
+                <Button type="submit" variant="contained" color="primary">Register
+                </Button>
+            </form>
+        </div>
+        <div  elevation={1} style={styles.paper}>
+            <h2>Login</h2>
+            <form onSubmit={handleSubmit}>
+                <FormControl variant="outlined" style={styles.input}>
+                    <InputLabel>Email</InputLabel>
+                    <OutlinedInput type="email" name="email" onChange={(e) => setLogEmail(e.target.value)} value={logEmail}/>
+                </FormControl>
+                <FormControl variant="outlined" style={styles.input}>
+                    <InputLabel>Password</InputLabel>
+                    <OutlinedInput type="password" name="password" onChange={(e) => setLogPassword(e.target.value)}value={logPassword}/>
+                </FormControl>
+                {/* <FormControl>
+                    <Checkbox label='I agree to the Terms and Conditions'/>
+                </FormControl> */}
+                <Button type="submit" variant="contained" color="primary">
+                    Login
+                </Button>
+            </form>
+        </div>
     </div>
     )
 }

@@ -1,6 +1,26 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, navigate } from '@reach/router';
+import {
+    FormControl,
+    InputLabel,
+    OutlinedInput,
+    Checkbox,
+    Select,
+    Button
+} from '@material-ui/core';
+
+const styles = {
+    paper: {
+        width: "12rem", padding: "1rem", display: "inline-block", verticalAlign: 'text-top'
+    },
+    input: {
+        marginBottom: "1rem"
+    },
+    button: {
+        width: "50%"
+    }
+}
 
 const ToolCreate = (props) => {
     const [type, setType] = useState("");
@@ -31,7 +51,7 @@ const ToolCreate = (props) => {
     return (
         <div>
             <h3> Create a tool for rental! </h3>
-            <Link to={`/`} > back to home </Link><br />
+            <Link to={`/homepage`} > back to home </Link><br />
             <form onSubmit={onSubmitHandler} >
 
                 <p><label htmlFor="Type">  Type: </label><br />

@@ -1,7 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, navigate } from '@reach/router';
+import {
+    Paper,
+    FormControl,
+    InputLabel,
+    OutlinedInput,
+    Button
+} from '@material-ui/core';
 
+const styles = {
+    paper: {
+        width: "20rem", padding: "1rem"
+    },
+    input: {
+        marginBottom: "1rem"
+    },
+    button: {
+        width: "100%"
+    }
+}
 
 export default props => {
     const [firstName, setFirstName] = useState("");

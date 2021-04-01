@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
-import { Link } from '@reach/router';
+import { navigate, Link } from '@reach/router';
+import { Table, TableBody, TableCell, TableHead, TableRow, Button } from '@material-ui/core';
 
 export default props => {
     const [allusers, setAllUsers] = useState([]);
@@ -26,31 +27,37 @@ export default props => {
     return (
         <div >
             <a href="/">Logout</a>
-            < h1 > These users are looking for share tools</h1>
+            < h3 > These users are looking for share tools</h3>
             <Link to="/user/new" > Add a user to the list </Link>
             <br/>
             <br/>
-            <center><table className="table table-danger col-8 mx-auto">
-                <tr>
-                    <th> Full Name </th>
-                    <th > Type </th>
-                    <th > Actions </th>
-                </tr>
+            <Table className="table table-danger col-8 mx-auto">
+                <TableHead>
+                    <TableRow>
+                        <TableCell> Full Name </TableCell>
+                        <TableCell > Type </TableCell>
+                        <TableCell > Actions </TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
                 {
                 allusers.map((user, index) => {
                     return (
-                        <tr key={index}>
-                            <td> {user.firstName} {user.lastName} </td>
-                            <td > {user?.tools?.type} </td>
-                            <td >
-                                < Link to={`/user/${user._id}`} > < button> Details </button></Link > |
-                                < Link to={`/user/${user._id}/edit`} > <button> Edit </button></Link > |
-                                < Link to={`/user/${user._id}/new_tool`} > <button> Add Tool </button></Link >
-                            </td>
-                        </tr>)
+                        <TableRow key={index}>
+                            <TableCell> {user.firstName} {user.lastName} </TableCell>
+                            <TableCell> {user?.tools?.type} </TableCell>
+                            <TableCell>
+                                <Button onClick={e => navigate(`/user/${user._id}`)}> Details </Button>
+                                <span> | </span>
+                                <Button onClick={e => navigate(`/user/${user._id}/edit`)}> Edit </Button>
+                                <span> | </span>
+                                <Button onClick={e => navigate(`/user/${user._id}/new_tool`)}> Add Tool </Button>
+                            </TableCell>
+                        </TableRow>)
                 })
                 }
-            </table></center>
+                </TableBody>
+            </Table>
         </div>
     )
 }
