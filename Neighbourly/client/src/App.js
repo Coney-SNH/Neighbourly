@@ -18,7 +18,7 @@ function App(props) {
 
     return ( < div className = "App">
         <h1> Neighborly </h1> 
-        <Link to = { `/` } > back to home </Link> <br/>
+        <Link to = { `/` } > Back to Home </Link> <br/>
         <Router >
         <LoginRegister path = "/"/>
         <Main path = "/homepage"/>
