@@ -42,7 +42,7 @@ export default props => {
                 console.log(res);
                 if (res.data.errors) {
                     setErrors(res.data.errors.errors)
-                } else { navigate("/") }
+                } else { navigate("/homepage") }
 
             })
             .catch(err => console.log(err))
@@ -52,7 +52,7 @@ export default props => {
             <h3> Edit {firstName} {lastName} </h3>
 
             <form onSubmit={updateUser} >
-                <Link to={`/`}> Home </Link><br />
+                <Link to={`/homepage`}> Home </Link><br />
 
                 <p><label htmlFor="First Name" >First Name: </label>
                 <input type="text" name="firstName" onChange={(e) => setFirstName(e.target.value)}

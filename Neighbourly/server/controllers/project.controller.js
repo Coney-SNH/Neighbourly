@@ -89,6 +89,12 @@ module.exports.getOneReview = (req, res) => {
         .catch(err => res.json({errors: err}))
 };
 
+module.exports.getAllReviews = (req, res) => {
+    User.find({"reviews._id": req.params.review_id})
+        .then(data => res.json({results: data}))
+        .catch(err => res.json({errors: err}))
+};
+
 // Update
 module.exports.updateUser = (req, res) => {
     User.findOneAndUpdate({ _id: req.params.id }, req.body, { new: true, runValidators: true })

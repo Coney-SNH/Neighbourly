@@ -27,15 +27,15 @@ export default (props) => {
             .then(res => {
                 console.log(res);
                 if (res.data.errors) {
-                    setErrors(res.data.errors.errors)
-                } else { navigate("/") }
+                    setErrors(res.data.errors)
+                } else { navigate("/homepage") }
             })
             .catch(err => console.log(err))
     }
     return (
         <div>
             <h3> Know a user needing a home ? </h3>
-            <Link to={`/`} > back to home </Link><br />
+            <Link to={`/homepage`} > back to home </Link><br />
             <form onSubmit={onSubmitHandler} ><br/>
                 <label htmlFor="First Name" >First Name: </label>
                 <input type="text" name="firstName" onChange={(e) => setFirstName(e.target.value)}

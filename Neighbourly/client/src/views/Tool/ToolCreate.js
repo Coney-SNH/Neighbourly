@@ -6,23 +6,27 @@ const ToolCreate = (props) => {
     const [type, setType] = useState("");
     const [description, setDescription] = useState("");
     const [price, setPrice] = useState(0);
+    const [startDate, setStartDate] = useState("");
+    const [endDate, setEndDate] = useState("");
     const [errors, setErrors] = useState({});
     const [user, setUser] = useState({});
-
+    const { id }=props;
 
     const onSubmitHandler = (e) => {
         e.preventDefault();
         //make a post request to create a new tool`
-        axios.post(`http://localhost:8000/api/user/${props._id}/tool`, {
+        axios.post(`http://localhost:8000/api/user/${id}/tool`, {
             type,
             description,
-            price
+            price,
+            startDate,
+            endDate
         })
             .then(res => {
                 console.log(res);
                 if (res.data.errors) {
                     setErrors(res.data.errors)
-                } else { navigate("/") }
+                } else { navigate("/homepage") }
             })
             .catch(err => console.log(err))
     }
@@ -31,7 +35,7 @@ const ToolCreate = (props) => {
     return (
         <div>
             <h3> Create a tool for rental! </h3>
-            <Link to={`/`} > back to home </Link><br />
+            <Link to={`/homepage`} > back to home </Link><br />
             <form onSubmit={onSubmitHandler} >
 
                 <p><label htmlFor="Type">  Type: </label><br />
@@ -46,6 +50,13 @@ const ToolCreate = (props) => {
                 <input type="number" name="price" onChange={(e) => setPrice(e.target.value)} value={price} />
                 <span > {errors.price ? errors.price.message : ''} </span></p>
                 
+                <p><label htmlFor="startDate"> Start Date: </label><br />
+                <input type="date" name="price" onChange={(e) => setStartDate(e.target.value)} value={startDate} />
+                <span > {errors.startDate ? errors.startDate.message : ''} </span></p>
+
+                <p><label htmlFor="endDate"> End Date: </label><br />
+                <input type="date" name="endDate" onChange={(e) => setEndDate(e.target.value)} value={endDate} />
+                <span > {errors.endDate ? errors.endDate.message : ''} </span></p>
                 <input type="submit" value="Add New Tool" />
             </form>
         </div>
