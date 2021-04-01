@@ -44,7 +44,6 @@ export default props => {
         )
     }
 
-    console.log(user.tools)
     return (
         <div>
             <h2>Details for {firstName}{lastName}</h2>
@@ -78,7 +77,7 @@ export default props => {
                                     <td>{tool.description}</td>
                                     <td>{tool.price}</td>
                                     <td>
-                                        <Link to={`/checkout`}><button>Rent Tool</button> </Link>
+                                        <Link to={`/user/${user._id}/tool/${tool._id}/checkout`}><button>Rent Tool</button> </Link>
                                     </td>
                                 </tr>
                             )

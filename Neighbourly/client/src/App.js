@@ -30,7 +30,7 @@ function App(props) {
             <Detail path = "/user/:id" />
             <ToolDetail path = "/tool/:id"/>
             <Connect path = "/user/:id/connect"/>
-            <CheckoutForm2 path = "/user/:id/checkout"/>
+            <CheckoutForm2 path = "/user/:_id/tool/:tool_id/checkout"/>
             <CheckoutForm2 path= "checkout"/>
         </Router>
         </div>
