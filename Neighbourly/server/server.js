@@ -81,4 +81,18 @@ require('./routes/project.routes')(app);
 // require('./routes/project.routes')(app);
 app.use(cors({ credentials: true, origin: 'http://localhost:3000' }));
 
-app.listen(8000, () => console.log("Now listening on port 8000"));
+const server = app.listen(8000, () => console.log("Now listening on port 8000"));
+
+const io = require('socket.io')(server, { cors: true })
+
+io.on('connection', socket => {
+    
+    socket.on('sendMessage', data => {
+        socket.emit('messageSent', data);
+    })
+
+    socket.on('clientTyping', data => {
+        socket.emit('clientTyping', data);
+    })
+    
+})
