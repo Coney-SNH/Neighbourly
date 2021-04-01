@@ -13,7 +13,7 @@ const ToolCreate = (props) => {
     const onSubmitHandler = (e) => {
         e.preventDefault();
         //make a post request to create a new tool`
-        axios.post(`http://localhost:8000/api/user/$_id/tool`, {
+        axios.post(`http://localhost:8000/api/user/${props._id}/tool`, {
             type,
             description,
             price

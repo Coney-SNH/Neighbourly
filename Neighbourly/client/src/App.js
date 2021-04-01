@@ -20,18 +20,18 @@ function App(props) {
     return ( 
     < div className = "App">
         <h1> Neighborly </h1> 
-        <Link to = { `/` } > Back to Home </Link> <br/>
+        <Link to = { `/homepage` } > Back to Home </Link> <br/>
         <Router >
             <LoginRegister path = "/"/>
             <Main path = "/homepage"/>
             <Create path = "/user/new" />
-            <CreateTool path="/user/:id/new_tool"/>
+            <CreateTool path="/user/:_id/new_tool"/>
             <Edit path = "/user/:id/edit" />
             <Detail path = "/user/:id" />
             <ToolDetail path = "/tool/:id"/>
             <Connect path = "/user/:id/connect"/>
             <CheckoutForm2 path = "/user/:id/checkout"/>
-            <CheckoutForm2 path="checkout"/>
+            <CheckoutForm2 path= "checkout"/>
         </Router>
         </div>
     );

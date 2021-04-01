@@ -12,18 +12,21 @@ export default props => {
     const [price, setPrice] = useState(0);
     const { id } = props;
     const [user, setUser] = useState({});
-    const [loaded, setLoaded] = useState(false);
+    const [tools, setTools] = useState({});
+    const [loaded, setLoaded] = useState(true);
 
     useEffect(() => {
         axios.get(`http://localhost:8000/api/user/` + id)
             .then(res => {
                 setUser(res.data.user);
                 setFirstName(res.data.user.firstName);
-                setLastName(res.data.user.lastname);
+                setLastName(res.data.user.lastName);
+                setAddress(res.data.user.address);
                 setType(res.data.user.type);
                 setDescription(res.data.user.description);
                 setPrice(res.data.user.price);
-                setLoaded(true);
+                setTools(res.data.user.tools);
+                setLoaded(false);
             })
             .catch(err => console.log(err.message))
     }, []);
@@ -34,6 +37,14 @@ export default props => {
                 navigate('/homepage')
             })
     }
+
+    if (loaded) {
+        return (
+            <p>Loading....</p>
+        )
+    }
+
+    console.log(user.tools)
     return (
         <div>
             <h2>Details for {firstName}{lastName}</h2>
@@ -48,14 +59,33 @@ export default props => {
             <label htmlFor="Address" > Address: {address}</label>
             <br />
 
-            <label htmlFor="Type">  Type: {type}</label>
-            <br />
 
-            <label htmlFor="Description" >  Description: {description}</label><br />
-            <br />
-
-            <label htmlFor="price"> Price: {price}</label><br />
-            <br />
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tool Type</th>
+                        <th>Tool Description</th>
+                        <th>Tool Price</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {
+                        tools.map((tool, i) => {
+                            return (
+                                <tr key={i}>
+                                    <td>{tool.type}</td>
+                                    <td>{tool.description}</td>
+                                    <td>{tool.price}</td>
+                                    <td>
+                                        <Link to={`/checkout`}><button>Rent Tool</button> </Link>
+                                    </td>
+                                </tr>
+                            )
+                        })
+                    }
+                </tbody>
+            </table>
 
             <button onClick={(e) => deleteUser(user._id)}> Delete {firstName} </button>
 
