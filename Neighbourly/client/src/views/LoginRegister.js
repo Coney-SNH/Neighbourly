@@ -84,9 +84,6 @@ export default  (props)=> {
             .catch(err => console.log(err))
         };
         // ********************************************************** Google MAP API******************************
-<<<<<<< HEAD
-        
-=======
         // function initMap() {
         //         axios.get (`https://maps.google.com/?cid=10281119596374313554`,)
         //     const map = new google.maps.Map(document.getElementById("map"), {
@@ -105,7 +102,6 @@ export default  (props)=> {
         // }
         
         // ************************************************************************************************************
->>>>>>> 7915a9f3d7cc096b47a6b9be909729057d90ec86
         return (
             <div  elevation={1} style={styles.paper}>
         {/* *************************** */}
