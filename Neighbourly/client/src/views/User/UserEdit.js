@@ -78,13 +78,13 @@ export default props => {
                         <InputLabel>First Name</InputLabel>
                         <OutlinedInput type="text" name="firstName" onChange={(e) => setFirstName(e.target.value)}
                                 value={firstName}/>
-                    <span>{errors.firstName ? errors.firstName.message : ''}</span>
+                    <span style={{color: 'red'}}>{errors.firstName ? errors.firstName.message : ''}</span>
                     </FormControl>
                     <FormControl variant="outlined" style={styles.input}>
                         <InputLabel>Last Name</InputLabel>
                         <OutlinedInput type="text" name="lastName" onChange={(e) => setLastName(e.target.value)}
                                 value={lastName}/>
-                    <span>{errors.lastName ? errors.lastName.message : ''}</span>
+                    <span style={{color: 'red'}}>{errors.lastName ? errors.lastName.message : ''}</span>
                     </FormControl>
                     <FormControl variant="outlined" style={styles.input}>
                         <InputLabel>Address</InputLabel>

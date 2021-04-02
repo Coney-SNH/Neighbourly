@@ -140,22 +140,22 @@ export default props => {
                         <TableCell>Actions</TableCell>
                     </TableRow>
                 </TableHead>
-                <tbody>
+                <TableBody>
                     {
                         user.reviews.map((review, i) => {
                             return (
-                                <tr key={i}>
-                                    <td>{review.name}</td>
-                                    <td><center>{review.rating}</center></td>
+                                <TableRow key={i}>
+                                    <TableCell>{review.name}</TableCell>
+                                    <TableCell><center>{review.rating}</center></TableCell>
                                     {/* <td>{review.review}</td> */}
-                                    <td>
-                                        <Link to={`/user/${user._id}/review/${review._id}/`}><button>Read Review</button> </Link>
-                                    </td>
-                                </tr>
+                                    <TableCell>
+                                        <Button variant="outlined" color="primary" onClick={e => navigate(`/user/${user._id}/review/${review._id}/`)}>Read Review</Button>
+                                    </TableCell>
+                                </TableRow>
                             )
                         })
                     }
-                </tbody>
+                </TableBody>
             </Table></center>
 
 

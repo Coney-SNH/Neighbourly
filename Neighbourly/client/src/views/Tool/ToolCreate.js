@@ -61,27 +61,27 @@ const ToolCreate = (props) => {
                 <FormControl variant="outlined" style={styles.input}>
                     <InputLabel>Type</InputLabel>
                     <OutlinedInput type="text" name="type" onChange={(e) => setType(e.target.value)} value={type}/>
-                <span> {errors.type ? errors.type.message : ''} </span>
+                <span style={{color: 'red'}}> {errors.type ? errors.type.message : ''} </span>
                 </FormControl>
                 <FormControl variant="outlined" style={styles.input}>
                     <InputLabel>Description</InputLabel>
                     <OutlinedInput type="text" name="description" onChange={(e) => setDescription(e.target.value)} value={description}/>
-                    <span> {errors.description ? errors.description.message : ''} </span>
+                    <span style={{color: 'red'}}> {errors.description ? errors.description.message : ''} </span>
                 </FormControl>
                 <FormControl variant="outlined" style={styles.input}>
                     <InputLabel>Daily Price (in $)</InputLabel>
                     <OutlinedInput type="number" name="price" onChange={(e) => setPrice(e.target.value)} value={price}/>
-                    <span> {errors.price ? errors.price.message : ''} </span>
+                    <span style={{color: 'red'}}> {errors.price ? errors.price.message : ''} </span>
                 </FormControl>
                 <FormControl variant="outlined" style={styles.input}>
                     <span>When will the tool be available:</span>
                     <OutlinedInput type="date" name="startDate" onChange={(e) => setStartDate(e.target.value)} value={startDate}/>
-                    <span> {errors.startDate ? errors.startDate.message : ''} </span>
+                    <span style={{color: 'red'}}> {errors.startDate ? errors.startDate.message : ''} </span>
                 </FormControl>
                 <FormControl variant="outlined" style={styles.input}>
                     <span>When will you need the tool back by:</span>
                     <OutlinedInput type="date" name="endDate" onChange={(e) => setEndDate(e.target.value)} value={endDate}/>
-                    <span> {errors.endDate ? errors.endDate.message : ''} </span>
+                    <span style={{color: 'red'}}> {errors.endDate ? errors.endDate.message : ''} </span>
                 </FormControl>
                 <Button type="submit" variant="contained" color="primary">
                     Add New Tool
