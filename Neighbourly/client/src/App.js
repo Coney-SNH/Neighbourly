@@ -1,6 +1,5 @@
-import { Link } from '@reach/router';
 import { Router } from '@reach/router';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import './App.css';
 
 import Main from './views/Main';
@@ -25,8 +24,6 @@ import ReviewEdit from './views/Review/ReviewEdit';
 
 
 function App(props) {
-    const [allusers, setAllUsers] = useState([]);
-
     return ( 
     < div className = "App">
         <div>
@@ -52,7 +49,6 @@ function App(props) {
             <Connect path = "/user/:id/connect"/>
             <Payments path= "/user/:id/payments"/>
             <CheckoutForm2 path = "/user/:_id/tool/:tool_id/checkout"/>
-            <CheckoutForm2 path= "checkout"/>
         </Router>
         </div>
     );

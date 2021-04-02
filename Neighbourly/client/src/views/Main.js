@@ -27,8 +27,13 @@ export default props => {
     return (
         <div >
             <a href="/">Logout</a>
+<<<<<<< HEAD
             < h3 > These users are looking for share tools</h3>
             <Link to="/user/new" > Add a user to the list </Link>
+=======
+            < h1 > These users are looking for share tools</h1>
+            {/* <Link to="/user/new" > Add a user to the list </Link> */}
+>>>>>>> 46e34793ec7b91549f7aab478cb46157fc6e11a6
             <br/>
             <br/>
             <Table className="table table-danger col-8 mx-auto">

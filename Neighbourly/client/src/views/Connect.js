@@ -31,8 +31,8 @@ const Connect = (props) => {
 
     return (
         <div>
-                        <Link to={`/homepage`}> Home </Link><br />
-            <h1>Send a Message to {user.firstName} {user.firstName}</h1>
+            <Link to={`/homepage`}> Home </Link><br />
+            <h1>Send a Message to {user.firstName} {user.lastName}</h1>
         </div>
     )
 }
