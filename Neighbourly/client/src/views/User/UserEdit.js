@@ -1,6 +1,26 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link, navigate } from '@reach/router';
+import {
+    FormControl,
+    InputLabel,
+    OutlinedInput,
+    Checkbox,
+    Select,
+    Button
+} from '@material-ui/core';
+
+const styles = {
+    paper: {
+        width: "12rem", padding: "1rem", display: "inline-block", verticalAlign: 'text-top'
+    },
+    input: {
+        marginBottom: "1rem"
+    },
+    button: {
+        width: "50%"
+    }
+}
 
 
 export default props => {
@@ -42,49 +62,54 @@ export default props => {
                 console.log(res);
                 if (res.data.errors) {
                     setErrors(res.data.errors.errors)
-                } else { navigate("/") }
+                } else { navigate("/homepage") }
 
             })
             .catch(err => console.log(err))
     }
     return (
         <div>
+            <Button color="primary" variant="outlined" onClick={e => navigate(`/homepage`)}>Home</Button>
             <h3> Edit {firstName} {lastName} </h3>
 
-            <form onSubmit={updateUser} >
-                <Link to={`/`}> Home </Link><br />
+            <div elevation={1} style={styles.paper}>
+                <form onSubmit={updateUser} >
+                    <FormControl variant="outlined" style={styles.input}>
+                        <InputLabel>First Name</InputLabel>
+                        <OutlinedInput type="text" name="firstName" onChange={(e) => setFirstName(e.target.value)}
+                                value={firstName}/>
+                    <span style={{color: 'red'}}>{errors.firstName ? errors.firstName.message : ''}</span>
+                    </FormControl>
+                    <FormControl variant="outlined" style={styles.input}>
+                        <InputLabel>Last Name</InputLabel>
+                        <OutlinedInput type="text" name="lastName" onChange={(e) => setLastName(e.target.value)}
+                                value={lastName}/>
+                    <span style={{color: 'red'}}>{errors.lastName ? errors.lastName.message : ''}</span>
+                    </FormControl>
+                    <FormControl variant="outlined" style={styles.input}>
+                        <InputLabel>Address</InputLabel>
+                        <OutlinedInput type="text" name="address" onChange={(e) => setAddress(e.target.value)}
+                                value={address}/>
+                    </FormControl>
+                    {/* <label htmlFor="Type">  Type: </label>
+                    <input type="text" name="type" onChange={(e) => setType(e.target.value)} value={type}/>
+                    <span > {errors.type ? errors.type.message : ''} </span> 
+                    <br/>
+                    
+                    <label htmlFor="Description" >  Description: </label><br/>
+                    <input type="text" name="description" onChange={(e) => setDescription(e.target.value)} value={description}/><br/>
+                    <span > {errors.description ? errors.description.message : ''} </span>
+                    <br/>
 
-                <p><label htmlFor="First Name" >First Name: </label>
-                <input type="text" name="firstName" onChange={(e) => setFirstName(e.target.value)}
-                value={firstName} />
-                <span> {errors.firstName ? errors.firstName.message : ''} </span></p>
-                
-                <p><label htmlFor="Last Name" > Last Name: </label>
-                <input type="text" name="lastName" onChange={(e) => setLastName(e.target.value)}
-                value={lastName}/>
-                <span> {errors.lastName ? errors.lastName.message : ''} </span></p>
-                
-                <p><label htmlFor="address" > Address: </label>
-                <input type="text" name="address" onChange={(e) => setAddress(e.target.value)}
-                value={address}/> </p>
-
-                {/* <label htmlFor="Type">  Type: </label>
-                <input type="text" name="type" onChange={(e) => setType(e.target.value)} value={type}/>
-                <span > {errors.type ? errors.type.message : ''} </span> 
-                <br/>
-                
-                <label htmlFor="Description" >  Description: </label><br/>
-                <input type="text" name="description" onChange={(e) => setDescription(e.target.value)} value={description}/><br/>
-                <span > {errors.description ? errors.description.message : ''} </span>
-                <br/>
-
-                <label htmlFor="price"> Price: </label><br/>
-                <input type="number" name="price" onChange={(e) => setPrice(e.target.value)} value={price}/>
-                <span > {errors.price ? errors.price.message : ''} </span>
-                <br/> */}
-                <br/>
-                <input type="submit" value="Edit User"/>
-            </form>
+                    <label htmlFor="price"> Price: </label><br/>
+                    <input type="number" name="price" onChange={(e) => setPrice(e.target.value)} value={price}/>
+                    <span > {errors.price ? errors.price.message : ''} </span>
+                    <br/> */}
+                <Button type="submit" variant="contained" color="primary">
+                    Edit User
+                </Button>
+                </form>
+            </div>
         </div>
     )
 

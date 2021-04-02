@@ -1,51 +1,57 @@
-import { Link } from '@reach/router';
 import { Router } from '@reach/router';
-import React, { useState } from 'react';
-import Main from './views/Main';
-//Create
-import Create from './views/User/UserCreate';
-import CreateTool from './views/Tool/ToolCreate';
-// import CreateReview from './views/Review/ReviewCreate';
-//Detail
-import Detail from './views/User/UserDetail';
-// import Detail from './views/Tool/ToolDetail';
-// import Detail from './views/ReviewDetail';
-//Edit
-import Edit from './views/User/UserEdit';
-// import Edit from './views/Tool/ToolEdit';
-// import Edit from './views/Review/ReviewEdit';
-//Stripe imports
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
-
+import React from 'react';
 import './App.css';
 
-const promise = loadStripe("pk_test_51IalToAQmXzgarKriNlG0enhbeYqakTPb3e8GyHE6mbNLEIZMACg8k5J0Ul8GPk9nFEsbuyBAUzhCMF5AELLp0CZ003isiZgwB");
+import Main from './views/Main';
+import Connect from './views/Connect';
+import Payments from './views/Payments';
+import LoginRegister from './views/LoginRegister';
+import CheckoutForm2 from './views/CheckoutForm2';
+import img from './Neighbourly.PNG';
+import { Box } from '@material-ui/core';
+
+// Create
+import UserCreate from './views/User/UserCreate';
+import ToolCreate from './views/Tool/ToolCreate';
+import ReviewCreate from './views/Review/ReviewCreate';
+//Detail
+import UserDetail from './views/User/UserDetail';
+import ToolDetail from './views/Tool/ToolDetail';
+import ReviewDetail from './views/Review/ReviewDetail';
+//Edit
+import UserEdit from './views/User/UserEdit';
+import ToolEdit from './views/Tool/ToolEdit';
+import ReviewEdit from './views/Review/ReviewEdit';
+
 
 function App(props) {
-    const [allusers, setAllUsers] = useState([]);
+    return ( 
+    < div className = "App">
+        <div>
+            <Box letterSpacing={3}>
+            <img src={img} style={{width: '50px', height: '50px', display: 'inline-block', verticalAlign: 'middle'}}/>
+            <h1 style={{display: 'inline-block', verticalAlign: 'middle'}}>Neighborly</h1> 
+            </Box>
+        </div>
+        {/* <Link to = { `/homepage` } > Back to Home </Link> <br/> */}
+        <Router >
+            <LoginRegister path = "/"/>
+            <Main path = "/homepage"/>
+            <UserCreate path = "/user/new" />
+            <ToolCreate path="/user/:id/new_tool"/>
+            <ReviewCreate path="/user/:id/new_review"/>
 
-    return ( <div className = "App">
-        <h1 > Neighborly </h1>
-        <Router>
-        <Main path = "/" />
-        <Create path = "/user/new" />
-        <CreateTool path = "/user/:id/new_tool" />
-        {/* <CreateReview path = "/user/new_review" /> */}
+            <UserEdit path = "/user/:id/edit" />
+            <ToolEdit path = "/user/:id/tool/edit" />
+            <ReviewEdit path = "/user/:id/review/edit" />
 
-        <Edit path = "/user/:id/edit" />
-        {/* <EditTool path = "/user/:id/edit_review" />
-        <EditReview path = "/user/:id/edit_review" /> */}
+            <UserDetail path = "/user/:id" />
+            <ToolDetail path = "/user/:id/tool"/>
+            <ReviewDetail path = "/user/:id/review/:id"/>
 
-        <Detail path = "/users/:id" />
-        {/* <DetailTool path = "/users/:id/detail_tool" />
-        <DetailReview path = "/users/:id/detail_review" /> */}
-
-        <Elements stripe={promise} >
-            <CheckoutForm path="/users/:id/checkout" />
-        </Elements>
-
-
+            <Connect path = "/user/:id/connect"/>
+            <Payments path= "/user/:id/payments"/>
+            <CheckoutForm2 path = "/user/:_id/tool/:tool_id/checkout"/>
         </Router>
         </div>
     );
