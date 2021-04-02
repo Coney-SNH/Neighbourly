@@ -6,12 +6,14 @@ module.exports = app => {
     app.post("/api/user/:id/tool", ProjectController.createNewTool);
     app.post("/api/user/:id/review", ProjectController.createNewReview);
     app.post("/api/user/login", ProjectController.loginUser);
+    // app.post("/api/:id/:tool", ProjectController.getOneToolPrice);
     // Read
     app.get("/api/user", ProjectController.getAllUsers);
     app.get("/api/user/:id", ProjectController.getOneUser);
     app.get("/api/tool/:id", ProjectController.getOneTool);
     app.get("/api/tool/", ProjectController.getAllTools);
     app.get("/api/review/:id", ProjectController.getOneReview);
+    app.get("/api/tool/:id/price", ProjectController.getOneToolPrice);
     // Update
     app.put("/api/user/:id", ProjectController.updateUser);
     app.put("/api/tool/:id", ProjectController.updateTool);

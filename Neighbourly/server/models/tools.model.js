@@ -4,9 +4,9 @@ const mongoose = require("mongoose");
 const ToolSchema = new mongoose.Schema({
     type: {
         type: String,
-            required: [true, "Tool type is required"],
-            minlength: [3, "Tool type must be at least 3 characters long"]
-        },
+        required: [true, "Tool type is required"],
+        minlength: [3, "Tool type must be at least 3 characters long"]
+    },
 
     description: {
         type: String,
@@ -17,8 +17,8 @@ const ToolSchema = new mongoose.Schema({
     price: {
         type: Number,
         required: [true, "Price is required"],
-        default: 0.01,
-        min: [0.01, "Price must be higher than 1 cent to make this transactional"],
+        default: 1,
+        min: [1, "Price must be higher than 1 dollar to make this transactional"],
     },
 
     startDate: {

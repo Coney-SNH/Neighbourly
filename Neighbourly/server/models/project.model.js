@@ -2,8 +2,12 @@ const mongoose = require("mongoose");
 const ToolSchema = require('./tools.model');
 const ReviewSchema = require('./review.model');
 const bcrypt = require('bcrypt');
+const jwt = require("jsonwebtoken");
 
-
+var validateEmail = function(email) {
+    var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    return re.test(email);
+}
 
 const UserSchema = new mongoose.Schema({
     // userName: {
@@ -25,17 +29,21 @@ const UserSchema = new mongoose.Schema({
     email: {
         type: String,
         required: [true, "An email is required"],
-        validate: {
-            validator: val => /^([\w-\.]+@([\w-]+\.)+[\w-]+)?$/.test(val),
-            message: "Please enter a valid email"
-        }
+        trim: true,
+        lowercase: true,
+        unique: true,
+        validate: [validateEmail, "Please enter a valid email."]
     },
     password: {
         type: String,
         required: [true, "A password is required"],
         minlength: [8, "Your password must be at least 8 characters in length"]
     },
-
+    address: {
+        type: String,
+        required: [true, "You must have an address"],
+        minLength: [3, "Please provide a longer address"]
+    }, 
     // address: {
     //     street: {
     //         type: String,
@@ -52,7 +60,7 @@ const UserSchema = new mongoose.Schema({
     //         required: [true, "You must enter a state"],
     //         minLength: [2, "You must choose a two letter state name"],
     //         maxLength: [2, "You must choose a two letter state name"]
-    //     }, 
+    //     },
     //     zipcode: {
     //         type: Number,
     //         required: [true, "You must enter a zipcode"],
@@ -61,11 +69,10 @@ const UserSchema = new mongoose.Schema({
     // },
 
     tools: [ToolSchema],
-    
+
     reviews: [ReviewSchema]
 
 }, { timestamps: true });
-
 // near the top is a good place to group our imports
 
 // this should go after 
