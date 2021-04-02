@@ -48,14 +48,14 @@ module.exports.loginUser = async(req, res) => {
 
 module.exports.createNewTool = (req, res) => {
     User.findOneAndUpdate({_id: req.params.id}, { $addToSet: { tools: req.body}}, {new: true, runValidators: true})
-        .then(data => res.json({results: data}))
-        .catch(err => res.json({errors: err}))
+        .then(data => res.json({message: "success", results: data}))
+        .catch(err => res.json({message: "error", errors: err}))
 };
 
 module.exports.createNewReview = (req, res) => {
     User.findOneAndUpdate({_id: req.params.id}, { $addToSet: { reviews: req.body}}, {new: true, runValidators: true})
-        .then(data => res.json({results: data}))
-        .catch(err => res.json({errors: err}))
+        .then(data => res.json({message: "success", results: data}))
+        .catch(err => res.json({message: "error",  errors: err}))
 };
 
 // Read
@@ -90,7 +90,13 @@ module.exports.getAllTools = (req, res) => {
 };
 
 module.exports.getOneReview = (req, res) => {
-    User.findOne({"review._id": req.params.review_id})
+    User.findOne({"reviews._id": req.params.id})
+        .then(data => res.json({message: "Success", results: data.reviews.filter(item => item._id == req.params.id)[0]}))
+        .catch(err => res.json({errors: err}))
+};
+
+module.exports.getAllReviews = (req, res) => {
+    User.find({"reviews._id": req.params.review_id})
         .then(data => res.json({results: data}))
         .catch(err => res.json({errors: err}))
 };
