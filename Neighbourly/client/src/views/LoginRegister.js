@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, Component } from 'react';
 import { navigate } from '@reach/router';
 // import Map from './Map';
 import MapOne from './MapOne';
@@ -26,6 +26,7 @@ const styles = {
     }
 }
 export default  (props)=> {
+    // *****************
     const{user, Users}=props;
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
@@ -82,39 +83,25 @@ export default  (props)=> {
             .catch(err => console.log(err))
         };
         // ********************************************************** Google MAP API******************************
-        // function initMap() {
-        //         axios.get (`https://maps.google.com/?cid=10281119596374313554`,)
-        //     const map = new google.maps.Map(document.getElementById("map"), {
-        //         zoom: 8,
-        //         center: { lat: 35.717, lng: 139.731 },
-        //     });
-        // }
-
-// function myMap() {
-    //     var mapProp = {
-        //         axios.get(`https://maps.google.com/?cid=10281119596374313554`)
-        //                 const map = new google.maps.Map(document.getElementById("googleMap"), mapProp);
-        //         center: new google.maps.LatLng(51.508742, -0.120850),
-        //         zoom: 5,
-        //     };
-        // }
-        
-        // ************************************************************************************************************
         
         return (
             <div  elevation={1} style={styles.paper}>
         {/* *************************** */}
 {/* <Map/> */}
+<div style={{margin: '5px', width: '150%', marginTop:'10px', height: '100%', padding:'2px'}}>
 <MapOne 
             google={props.google}
             center={{ lat: 47.628933, lng: -122.343181}}
             height='300px'
             zoom={15}/>
+            </div>
+
         {/* <MapForm google={props.google}
             center={{ lat: 47.628934, lng: -122.343181 }}
             height='300px'
             zoom={15}/> */}
         {/* <GoogleFileMap /> */}
+        {/* <MapOne /> */}
         {/* *************************** */}
 
         <h2>Register{JSON.stringify(firstName)}</h2>
