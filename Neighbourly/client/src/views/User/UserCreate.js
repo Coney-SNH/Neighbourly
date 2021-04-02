@@ -1,15 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link, navigate } from '@reach/router';
-import {
-    FormControl,
-    InputLabel,
-    OutlinedInput,
-    Checkbox,
-    Select,
-    Button
-} from '@material-ui/core';
-
 
 
 export default (props) => {
