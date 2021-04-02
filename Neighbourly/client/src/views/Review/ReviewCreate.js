@@ -29,8 +29,8 @@ const ReviewCreate = (props) => {
         })
             .then(res => {
                 console.log(res);
-                if (res.data.errors) {
-                    setErrors(res.data.errors)
+                if (res.data.message == "error") {
+                    setErrors(res.data.errors.errors.reviews.errors)
                 } else { navigate("/homepage") }
             })
             .catch(err => console.log(err))
@@ -38,14 +38,14 @@ const ReviewCreate = (props) => {
 
     return (
 
-
         <div>
             <Link to={`/homepage`}> Home </Link><br />
             <h1> Create a review for this user</h1>
 
             <form onSubmit={onSubmitHandler}>
+
                 <p><label htmlFor="name">  Reviewer's Name: </label><br />
-                    <input type="text" name="name" onChange={(e) => setName(e.target.value)} value={name} />
+                    <input type="text" name="name" onChange={(e) => setName(e.target.value)} value={name} /><br />
                     <span > {errors.name ? errors.name.message : ''} </span></p>
 
                 <p><label htmlFor="rating" >  User Rating: </label><br />

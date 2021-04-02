@@ -24,14 +24,14 @@ const ToolCreate = (props) => {
         })
             .then(res => {
                 console.log(res);
-                if (res.data.errors) {
-                    setErrors(res.data.errors)
+                if (res.data.message == "error") {
+                    setErrors(res.data.errors.errors.tools.errors)
                 } else { navigate(`/user/${id}`) }
             })
             .catch(err => console.log(err))
     }
 
-
+    console.log(errors);
     return (
         <div>
             <h3> Create a tool for rental! </h3>
@@ -39,23 +39,23 @@ const ToolCreate = (props) => {
             <form onSubmit={onSubmitHandler} >
 
                 <p><label htmlFor="Type">  Type: </label><br />
-                <input type="text" name="type" onChange={(e) => setType(e.target.value)} value={type} />
-                <span > {errors.type ? errors.type.message : ''} </span></p>
+                <input type="text" name="type" onChange={(e) => setType(e.target.value)} value={type} /> <br />
+                <span > {errors.type ? errors.type.message : ''} </span></p> 
                 
                 <p><label htmlFor="Description" >  Description: </label><br />
                 <input type="text" name="description" onChange={(e) => setDescription(e.target.value)} value={description} /><br />
                 <span> {errors.description ? errors.description.message : ''} </span></p>
                 
                 <p><label htmlFor="price"> Price: </label><br />
-                <input type="number" name="price" onChange={(e) => setPrice(e.target.value)} value={price} />
+                <input type="number" name="price" onChange={(e) => setPrice(e.target.value)} value={price} /> <br />
                 <span > {errors.price ? errors.price.message : ''} </span></p>
                 
                 <p><label htmlFor="startDate"> When will the tool be available: </label><br />
-                <input type="date" name="startDate" onChange={(e) => setStartDate(e.target.value)} value={startDate} />
+                <input type="date" name="startDate" onChange={(e) => setStartDate(e.target.value)} value={startDate} /> <br />
                 <span > {errors.startDate ? errors.startDate.message : ''} </span></p>
                 
                 <p><label htmlFor="endDate"> When will you need the tool back by: </label><br />
-                <input type="date" name="endDate" onChange={(e) => setEndDate(e.target.value)} value={endDate} />
+                <input type="date" name="endDate" onChange={(e) => setEndDate(e.target.value)} value={endDate} /> <br />
                 <span > {errors.endDate ? errors.endDate.message : ''} </span></p>
                 
                 <input type="submit" value="Add New Tool" />
