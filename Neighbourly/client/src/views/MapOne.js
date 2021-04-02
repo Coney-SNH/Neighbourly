@@ -3,6 +3,27 @@ import { withGoogleMap, GoogleMap, withScriptjs, InfoWindow, Marker, GoogleApiWr
 import Autocomplete from "react-google-autocomplete";
 import Geocode from "react-geocode";
 // import Autocomplete from 'react-google-autocomplete';
+
+import {
+    FormControl,
+    InputLabel,
+    OutlinedInput,
+    Checkbox,
+    Select,
+    Button
+} from '@material-ui/core';
+import axios from "axios";
+const styles = {
+    paper: {
+        width: "12rem", padding: "1rem", display: "inline-block", verticalAlign: 'text-top'
+    },
+    input: {
+        marginBottom: "1rem"
+    },
+    button: {
+        width: "50%"
+    }
+}
 Geocode.setApiKey("AIzaSyAKg4xpvUO6EX3FJpOc-CzxfxZw4zbe3uo");
 Geocode.enableDebug();
 class MapOne extends Component {
@@ -239,13 +260,13 @@ class MapOne extends Component {
                         <Marker/>
                         {/* For Auto complete Search Box */}
                         <Autocomplete
-                            // style={{
-                            //     width: '50%',
-                            //     height: '20px',
-                            //     paddingLeft: '10px',
-                            //     marginTop: '2px',
-                            //     marginBottom: '100px'
-                            // }}
+                            style={{
+                                width: '100%',
+                                height: '30px',
+                                paddingLeft: '5px',
+                                marginTop: '5px',
+                                marginBottom: '100px'
+                            }}
                             onPlaceSelected={this.onPlaceSelected}
                             types={['(regions)']}/>
 
@@ -258,7 +279,7 @@ class MapOne extends Component {
                 if (this.props.center.lat !== undefined) {
                     map = <div>
                 <div>
-                            <div className="form-group" style={{ marginTop: '5px', padding: '5px', marginRight: '2px'}}>
+                            <div className="form-group" style={{ marginTop: '5px', padding: 'px', marginRight: '2px'}}>
                                 <label htmlFor="">Area</label>
                                 <input type="text" name="area" className="form-control" onChange={this.onChange}  defaultValue={this.state.city} />
                     </div>
