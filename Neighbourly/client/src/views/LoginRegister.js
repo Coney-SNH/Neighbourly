@@ -159,25 +159,19 @@ return (
         
         // ************************************************************************************************************
         return (
-            <div  elevation={1} style={styles.paper}>
+            <div style={{margin: '0 auto'}}>
         {/* *************************** */}
 {/* <Map/> */}
-<div style={{margin: '5px', width: '150%', marginTop:'10px', height: '100%', padding:'2px'}}>
-<MapOne 
-            google={props.google}
-            center={{ lat: 47.628933, lng: -122.343181}}
-            height='300px'
-            zoom={15}/>
-            </div>
 
         {/* <MapForm google={props.google}
             center={{ lat: 47.628934, lng: -122.343181 }}
             height='300px'
-            zoom={15}/> */}
+        zoom={15}/> */}
         {/* <GoogleFileMap /> */}
         {/* <MapOne /> */}
         {/* *************************** */}
 
+<<<<<<< HEAD
         <h2>Register{JSON.stringify(firstName)}</h2>
         <form onSubmit = {onSubmitHandler}>
             <FormControl variant="outlined" style={styles.input}>
@@ -187,11 +181,63 @@ return (
             </FormControl>
             <span > {errors.firstName ? errors.firstName.message : ''} </span>
 >>>>>>> 46e34793ec7b91549f7aab478cb46157fc6e11a6
+=======
+        <div elevation={1} style={styles.paper}>
+            <h2>Register{JSON.stringify(firstName)}</h2>
+            <form onSubmit = {onSubmitHandler}>
+                <FormControl variant="outlined" style={styles.input}>
+                    <InputLabel>First Name</InputLabel>
+                    <OutlinedInput type="text" name="firstName" onChange={(e) => setFirstName(e.target.value)}
+                            value={firstName}/>
+                </FormControl>
+                <span > {errors.firstName ? errors.firstName.message : ''} </span>
+                    <FormControl variant="outlined" style={styles.input}>
+                        <InputLabel>Last Name</InputLabel>
+                    <OutlinedInput type="text" name="lastName" onChange={(e) => setLastName(e.target.value)}
+                            value={lastName}/>
+                    </FormControl>
+                <span > {errors.lastName ? errors.lastName.message : ''} </span>
+                <FormControl variant="outlined" style={styles.input}>
+                    <InputLabel>E-mail</InputLabel>
+                    <OutlinedInput type="text" name="email" onChange={(e) => setEmail(e.target.value)}
+                        value={email} />
+                </FormControl>
+                <span > {errors.email ? errors.email.message : ''} </span>
+                <FormControl variant="outlined" style={styles.input}>
+                    <InputLabel>Password</InputLabel>
+                    <OutlinedInput type="password" name="password" onChange={(e) => setPassword(e.target.value)}
+                            value={password} />
+                </FormControl>
+                <span > {errors.password ? errors.password.message : ''} </span>
+                <FormControl variant="outlined" style={styles.input}>
+                    <InputLabel> Confirm Password</InputLabel>
+                    <OutlinedInput type="password" name="Confirmpassword" onChange={(e)=> setConfirmPassword(e.target.value)} value={confirmPassword}/>
+                </FormControl>
+                <FormControl variant="outlined" style={styles.input}>
+                    <InputLabel>Address</InputLabel>
+                    <OutlinedInput type="text" name="address" onChange={(e) => setAddress(e.target.value)} value={address} />
+                </FormControl>
+                <span > {errors.address ? errors.address.message : ''} </span>
+                <Button type="submit" variant="contained" color="primary">Register
+                </Button>
+            </form>
+        </div>
+        <div elevation={1} style={styles.paper}>
+            <h2>Login</h2>
+            <form onSubmit={handleSubmit}>
+                <FormControl variant="outlined" style={styles.input}>
+                    <InputLabel>Email</InputLabel>
+                    <OutlinedInput type="email" name="email" onChange={(e) => setLogEmail(e.target.value)} value={logEmail}/>
+                </FormControl>
+>>>>>>> 82bbbb06ab144f97050a06dd2e09e92051a02782
                 <FormControl variant="outlined" style={styles.input}>
                     <InputLabel>Password</InputLabel>
                     <OutlinedInput type="password" name="password" onChange={(e) => setLogPassword(e.target.value)}value={logPassword}/>
                 </FormControl>
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> 82bbbb06ab144f97050a06dd2e09e92051a02782
                 {/* <FormControl>
                     <Checkbox label='I agree to the Terms and Conditions'/>
                 </FormControl> */}
@@ -199,6 +245,7 @@ return (
                     Login
                 </Button>
             </form>
+<<<<<<< HEAD
         </div>
 =======
             <span > {errors.lastName ? errors.lastName.message : ''} </span>
@@ -244,6 +291,16 @@ return (
             </Button>
         </form>
 >>>>>>> 46e34793ec7b91549f7aab478cb46157fc6e11a6
+=======
+                <div style={{margin: '5px', width: '150%', marginTop:'10px', height: '100%', padding:'2px'}}>
+                <MapOne 
+                            google={props.google}
+                            center={{ lat: 47.628933, lng: -122.343181}}
+                            height='300px'
+                            zoom={15}/>
+                            </div>
+        </div>
+>>>>>>> 82bbbb06ab144f97050a06dd2e09e92051a02782
     </div>
     )
 }

@@ -1,6 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import Axios from 'axios';
+<<<<<<< HEAD
 import { navigate, Link } from '@reach/router';
+=======
+import { navigate } from '@reach/router';
+>>>>>>> 82bbbb06ab144f97050a06dd2e09e92051a02782
 import { Table, TableBody, TableCell, TableHead, TableRow, Button } from '@material-ui/core';
 
 export default props => {
@@ -26,6 +30,7 @@ export default props => {
 
     return (
         <div >
+<<<<<<< HEAD
             <a href="/">Logout</a>
 <<<<<<< HEAD
             < h3 > These users are looking for share tools</h3>
@@ -42,6 +47,30 @@ export default props => {
                         <TableCell> Full Name </TableCell>
                         <TableCell > Type </TableCell>
                         <TableCell > Actions </TableCell>
+=======
+            <Button variant="outlined" onClick={e => navigate(`/`)}>Logout</Button>
+            {/* < h1 > These users are looking for share tools</h1> */}
+            {/* <Link to="/user/new" > Add a user to the list </Link> */}
+            <h3 style={{textAlign: 'left'}}>Manage Your Tools:</h3>
+            <center><Table className="table table-danger col-8 mx-auto">
+                <TableHead>
+                    <TableRow>
+                        <TableCell> Placeholder </TableCell>
+                        <TableCell> Placeholder </TableCell>
+                        <TableCell> Placeholder </TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                </TableBody>
+            </Table></center>
+            <h3 style={{textAlign: 'left'}}>Available Tools:</h3>
+            <center><Table className="table table-danger col-8 mx-auto">
+                <TableHead>
+                    <TableRow>
+                        <TableCell> Full Name </TableCell>
+                        <TableCell> Type </TableCell>
+                        <TableCell> Actions </TableCell>
+>>>>>>> 82bbbb06ab144f97050a06dd2e09e92051a02782
                     </TableRow>
                 </TableHead>
                 <TableBody>
@@ -52,17 +81,28 @@ export default props => {
                             <TableCell> {user.firstName} {user.lastName} </TableCell>
                             <TableCell> {user?.tools?.type} </TableCell>
                             <TableCell>
+<<<<<<< HEAD
                                 <Button onClick={e => navigate(`/user/${user._id}`)}> Details </Button>
                                 <span> | </span>
                                 <Button onClick={e => navigate(`/user/${user._id}/edit`)}> Edit </Button>
                                 <span> | </span>
                                 <Button onClick={e => navigate(`/user/${user._id}/new_tool`)}> Add Tool </Button>
+=======
+                                <Button style={{marginRight: '5px'}} variant="outlined" color="primary" onClick={e => navigate(`/user/${user._id}`)}> Details </Button>
+                                <Button style={{marginRight: '5px'}} variant="outlined" color="primary" onClick={e => navigate(`/user/${user._id}/edit`)}> Edit </Button>
+                                <Button style={{marginRight: '5px'}} variant="outlined" color="primary" onClick={e => navigate(`/user/${user._id}/connect`)}> Connect </Button>
+                                <Button variant="outlined" color="primary" onClick={e => navigate(`/user/${user._id}/new_tool`)}> Add Tool </Button>
+>>>>>>> 82bbbb06ab144f97050a06dd2e09e92051a02782
                             </TableCell>
                         </TableRow>)
                 })
                 }
                 </TableBody>
+<<<<<<< HEAD
             </Table>
+=======
+            </Table></center>
+>>>>>>> 82bbbb06ab144f97050a06dd2e09e92051a02782
         </div>
     )
 }

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Link, navigate } from '@reach/router';
 import Chat from '../components/Chat';
+import { Button } from '@material-ui/core';
 
 
 const Connect = (props) => {
@@ -28,11 +29,11 @@ const Connect = (props) => {
             .catch(err => console.log(err.message))
     }, []);
 
-
     return (
         <div>
-            <Link to={`/homepage`}> Home </Link><br />
-            <h1>Send a Message to {user.firstName} {user.lastName}</h1>
+            <Button color="primary" variant="outlined" onClick={e => navigate(`/homepage`)}>Home</Button>
+            <h3>Send a Message to {user.firstName} {user.lastName}</h3>
+            <Chat id={id}/>
         </div>
     )
 }
