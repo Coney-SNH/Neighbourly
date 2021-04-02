@@ -90,13 +90,25 @@ const server = app.listen(8000, () => console.log("Now listening on port 8000"))
 const io = require('socket.io')(server, { cors: true })
 
 io.on('connection', socket => {
+
+    console.log('yay');
     
     socket.on('sendMessage', data => {
-        socket.emit('messageSent', data);
+        // console.log('pls');
+        socket.to(data.room).emit('messageSent', data);
     })
 
     socket.on('clientTyping', data => {
-        socket.emit('clientTyping', data);
+        // console.log('pls again')
+        socket.to(data.room).emit('clientTyping', data);
     })
-    
+
+    socket.on('joinroom', data => {
+        console.log(data);
+        socket.join(data);
+    })
+
+    socket.on('disconnect', () => {
+        console.log(`user ${socket.id} has left the socket connection`)
+    })
 })
