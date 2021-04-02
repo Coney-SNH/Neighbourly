@@ -11,7 +11,7 @@ const ReviewCreate = (props) => {
     // const [description, setDescription] = useState("");
     // const [price, setPrice] = useState(0);
     const [errors, setErrors] = useState({});
-    const [user, setUser] = useState({});
+    // const [user, setUser] = useState({});
     const { id } = props;
 
 

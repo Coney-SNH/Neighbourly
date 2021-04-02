@@ -55,7 +55,7 @@ export default props => {
     }
     return (
         <div>
-            <h2>Details for {firstName}{lastName}</h2>
+            <h2>Details for {firstName} {lastName}</h2>
             <Link to={`/homepage`}> Home </Link><br />
 
             <p><label htmlFor="First Name" >First Name: {firstName}</label></p>

@@ -27,7 +27,7 @@ export default props => {
         <div >
             <a href="/">Logout</a>
             < h1 > These users are looking for share tools</h1>
-            <Link to="/user/new" > Add a user to the list </Link>
+            {/* <Link to="/user/new" > Add a user to the list </Link> */}
             <br/>
             <br/>
             

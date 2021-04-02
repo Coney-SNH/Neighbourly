@@ -6,6 +6,7 @@ import {
 } from "@stripe/react-stripe-js";
 import "./Stripe.css";
 import axios from 'axios';
+import { Link, navigate } from '@reach/router';
 
 
 export default function CheckoutForm(props) {
@@ -20,12 +21,13 @@ export default function CheckoutForm(props) {
     const [loading, setLoading] = useState(true);
     const [thisUser, setThisUser] = useState({})
     const [thisTool, setThisTool] = useState({})
-    const { user, tool } = props;
+    const [thisToolPrice, setThisToolPrice] = useState(1)
+    const { user, tool, toolPrice } = props;
 
     useEffect(() => {
         axios.get(`http://localhost:8000/api/user/${user}`)
             .then(res => {
-                console.log(res);
+                // console.log(res);
                 setThisUser(res.data.user);
                 // setThisTool(res.data.user.tools);
                 setLoading(false);
@@ -36,8 +38,9 @@ export default function CheckoutForm(props) {
     useEffect(()=> {
         axios.get(`http://localhost:8000/api/tool/${tool}`)
             .then(res => {
-                console.log(res);
+                // console.log(res);
                 setThisTool(res.data.results);
+                setThisToolPrice(res.data.results.price);
             })
     }, []);
 
@@ -48,7 +51,7 @@ export default function CheckoutForm(props) {
             headers: {
                 "Content-Type": "application/json"
             },
-            body: JSON.stringify({items: [{ id: "xl-tshirt" }]})
+            body: JSON.stringify({items: [toolPrice]})
         })
             .then(res => {
                 return res.json();
@@ -57,6 +60,7 @@ export default function CheckoutForm(props) {
                 setClientSecret(data.clientSecret);
             });
     }, []);
+    
 
     const cardStyle = {
         style: {
@@ -103,7 +107,7 @@ export default function CheckoutForm(props) {
         }
     };
 
-    console.log(thisTool);
+    // console.log(toolPrice);
 
     if (loading) {
         return (
@@ -111,9 +115,13 @@ export default function CheckoutForm(props) {
         )
     }
 
+
     return (
         <>
         <div>
+            <Link to={`/homepage`}> Home </Link>
+            <br/>
+            <Link to={`/user/${thisUser._id}`}> {thisUser.firstName}'s details page </Link>
             <h3>Confirmation</h3>
             <p>You are about to rent the {thisTool.type}</p>
             <p>from {thisUser.firstName} {thisUser.lastName}</p>

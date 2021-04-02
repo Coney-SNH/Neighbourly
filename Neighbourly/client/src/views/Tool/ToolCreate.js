@@ -26,7 +26,7 @@ const ToolCreate = (props) => {
                 console.log(res);
                 if (res.data.errors) {
                     setErrors(res.data.errors)
-                } else { navigate(`/user/${props._id}`) }
+                } else { navigate(`/user/${id}`) }
             })
             .catch(err => console.log(err))
     }
