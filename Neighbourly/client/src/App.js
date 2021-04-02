@@ -7,6 +7,8 @@ import Connect from './views/Connect';
 import Payments from './views/Payments';
 import LoginRegister from './views/LoginRegister';
 import CheckoutForm2 from './views/CheckoutForm2';
+import img from './Neighbourly.PNG';
+import { Box } from '@material-ui/core';
 
 // Create
 import UserCreate from './views/User/UserCreate';
@@ -25,7 +27,12 @@ import ReviewEdit from './views/Review/ReviewEdit';
 function App(props) {
     return ( 
     < div className = "App">
-        <h1> Neighborly </h1> 
+        <div>
+            <Box letterSpacing={3}>
+            <img src={img} style={{width: '50px', height: '50px', display: 'inline-block', verticalAlign: 'middle'}}/>
+            <h1 style={{display: 'inline-block', verticalAlign: 'middle'}}>Neighborly</h1> 
+            </Box>
+        </div>
         {/* <Link to = { `/homepage` } > Back to Home </Link> <br/> */}
         <Router >
             <LoginRegister path = "/"/>

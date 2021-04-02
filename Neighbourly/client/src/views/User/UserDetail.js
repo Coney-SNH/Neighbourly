@@ -1,9 +1,34 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios';
 import { Link, navigate } from '@reach/router';
+import { Table, TableBody, TableCell, TableHead, TableRow, Button,} from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+
+const useStyles = makeStyles({
+    root: {
+      minWidth: 275,
+    },
+    bullet: {
+      display: 'inline-block',
+      margin: '0 2px',
+      transform: 'scale(0.8)',
+    },
+    title: {
+      fontSize: 14,
+    },
+    pos: {
+      marginBottom: 12,
+    },
+  });
 
 
 export default props => {
+    const classes = useStyles();
+    const bull = <span className={classes.bullet}>•</span>;
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [address, setAddress] = useState("");
@@ -55,50 +80,66 @@ export default props => {
     }
     return (
         <div>
+            <Button color="primary" variant="outlined" onClick={e => navigate(`/homepage`)}>Home</Button>
             <h2>Details for {firstName} {lastName}</h2>
-            <Link to={`/homepage`}> Home </Link><br />
-
-            <p><label htmlFor="First Name" >First Name: {firstName}</label></p>
-            
-            <p><label htmlFor="Last Name" > Last Name: {lastName}</label></p>
-            
-            <p><label htmlFor="Address" > Address: {address}</label></p><br />
-            <table>
-                <thead>
-                    <tr>
-                        <th>Tool Type  |</th>
-                        <th>Tool Description  |</th>
-                        <th>Tool Price  |</th>
-                        <th>Actions</th>
-                    </tr>
-                </thead>
-                <tbody>
+            <Card className={classes.root} variant="outlined">
+                <CardContent>
+                    <Typography color="textSecondary">
+                    First Name:
+                    </Typography>
+                    <Typography className={classes.pos} variant="h5" component="h2">
+                    {firstName}
+                    </Typography>
+                    <Typography color="textSecondary">
+                    Last Name:
+                    </Typography>
+                    <Typography className={classes.pos} variant="h5" component="h2">
+                    {lastName}
+                    </Typography>
+                    <Typography color="textSecondary">
+                    Address:
+                    </Typography>
+                    <Typography className={classes.pos} variant="h5" component="h2">
+                    {address}
+                    </Typography>
+                </CardContent>
+                </Card>
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Tool Type</TableCell>
+                        <TableCell>Tool Description</TableCell>
+                        <TableCell>Tool Price</TableCell>
+                        <TableCell>Actions</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
                     {
                         user.tools.map((tool, i) => {
                             return (
-                                <tr key={i}>
-                                    <td>{tool.type}</td>
-                                    <td>{tool.description}</td>
-                                    <td>{tool.price}</td>
-                                    <td>
-                                        <Link to={`/user/${user._id}/tool/${tool._id}/checkout`}><button>Rent Tool</button> </Link>
-                                    </td>
-                                </tr>
+                                <TableRow key={i}>
+                                    <TableCell>{tool.type}</TableCell>
+                                    <TableCell>{tool.description}</TableCell>
+                                    <TableCell>{tool.price}</TableCell>
+                                    <TableCell>
+                                        <Button variant="outlined" color="primary" onClick={e => navigate(`/user/${user._id}/tool/${tool._id}/checkout`)}>Rent Tool</Button>
+                                    </TableCell>
+                                </TableRow>
                             )
                         })
                     }
-                </tbody>
-            </table>
+                </TableBody>
+            </Table>
             <br/>
             <br/>
-            <center><table>
-                <thead>
-                    <tr>
-                        <th> Reviewer |</th>
-                        <th>  User Rating  |</th>
-                        <th> Actions</th>
-                    </tr>
-                </thead>
+            <center><Table>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Reviewer</TableCell>
+                        <TableCell>User Rating</TableCell>
+                        <TableCell>Actions</TableCell>
+                    </TableRow>
+                </TableHead>
                 <tbody>
                     {
                         user.reviews.map((review, i) => {
@@ -115,15 +156,15 @@ export default props => {
                         })
                     }
                 </tbody>
-            </table></center>
+            </Table></center>
 
 
 
             <br/>
             <br/>
-            <button onClick={(e) => reviewUser(user._id)}> Write a review for {firstName} </button> <br/> <br/>
+            <Button variant="contained" color="primary" onClick={(e) => reviewUser(user._id)}> Write a review for {firstName} </Button> <br/> <br/>
 
-            <button onClick={(e) => deleteUser(user._id)}> Delete {firstName} </button>
+            <Button variant="contained" color="primary" onClick={(e) => deleteUser(user._id)}> Delete {firstName} </Button>
 
         </div>
     )

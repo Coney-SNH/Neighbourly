@@ -7,9 +7,33 @@ import {
 import "./Stripe.css";
 import axios from 'axios';
 import { Link, navigate } from '@reach/router';
+import { Button } from '@material-ui/core';
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Typography from '@material-ui/core/Typography';
+
+const useStyles = makeStyles({
+    root: {
+      minWidth: 275,
+    },
+    bullet: {
+      display: 'inline-block',
+      margin: '0 2px',
+      transform: 'scale(0.8)',
+    },
+    title: {
+      fontSize: 14,
+    },
+    pos: {
+      marginBottom: 12,
+    },
+  });
 
 
 export default function CheckoutForm(props) {
+    const classes = useStyles();
     const [succeeded, setSucceeded] = useState(false);
     const [error, setError] = useState(null);
     const [processing, setProcessing] = useState('');
@@ -119,14 +143,19 @@ export default function CheckoutForm(props) {
     return (
         <>
         <div>
-            <Link to={`/homepage`}> Home </Link>
-            <br/>
-            <Link to={`/user/${thisUser._id}`}> {thisUser.firstName}'s details page </Link>
+            <Button style={{marginRight: "5px"}} color="primary" variant="outlined" onClick={e => navigate(`/homepage`)}>Home</Button>
+            <Button color="primary" variant="outlined" onClick={e => navigate(`/user/${thisUser._id}`)}>{thisUser.firstName}'s details page</Button>
             <h3>Confirmation</h3>
-            <p>You are about to rent the {thisTool.type}</p>
-            <p>from {thisUser.firstName} {thisUser.lastName}</p>
-            <p>for ${thisTool.price} a day.</p>
-            <br/>
+            <Card className={classes.root} variant="outlined">
+                <CardContent>
+                    <Typography variant="body1" component="p">
+                    You are about to rent the {thisTool.type}
+                    </Typography>
+                    <Typography variant="body1" component="p">
+                    from {thisUser.firstName} {thisUser.lastName} for ${thisTool.price} a day.
+                    </Typography>
+                </CardContent>
+                </Card>
             <h4>If this is correct, please enter your card information below</h4>
         <form id="payment-form" class="form" onSubmit={handleSubmit}>
             <input type="text" class="input" value={email} onChange={(e) => setEmail(e.target.value)} placeholder={thisUser.email} />
