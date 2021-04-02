@@ -46,7 +46,7 @@ export default props => {
                 <TableHead>
                     <TableRow>
                         <TableCell> Full Name </TableCell>
-                        <TableCell> Type </TableCell>
+                        <TableCell>  </TableCell>
                         <TableCell> Actions </TableCell>
                     </TableRow>
                 </TableHead>

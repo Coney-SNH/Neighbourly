@@ -32,7 +32,8 @@ const Connect = (props) => {
     return (
         <div>
             <Button color="primary" variant="outlined" onClick={e => navigate(`/homepage`)}>Home</Button>
-            <h3>Send a Message to {user.firstName} {user.lastName}</h3>
+            {/* <h3>Send a Message to {user.firstName} {user.lastName}</h3> */}
+            <h3>Chat Channel for Neighbourly</h3>
             <Chat id={id}/>
         </div>
     )
