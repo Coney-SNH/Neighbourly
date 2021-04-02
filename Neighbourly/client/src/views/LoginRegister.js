@@ -123,25 +123,25 @@ export default  (props)=> {
                     <OutlinedInput type="text" name="firstName" onChange={(e) => setFirstName(e.target.value)}
                             value={firstName}/>
                 </FormControl>
-                <span > {errors.firstName ? errors.firstName.message : ''} </span>
+                <span style={{color: 'red'}}> {errors.firstName ? errors.firstName.message : ''} </span>
                     <FormControl variant="outlined" style={styles.input}>
                         <InputLabel>Last Name</InputLabel>
                     <OutlinedInput type="text" name="lastName" onChange={(e) => setLastName(e.target.value)}
                             value={lastName}/>
                     </FormControl>
-                <span > {errors.lastName ? errors.lastName.message : ''} </span>
+                <span style={{color: 'red'}}> {errors.lastName ? errors.lastName.message : ''} </span>
                 <FormControl variant="outlined" style={styles.input}>
                     <InputLabel>E-mail</InputLabel>
                     <OutlinedInput type="text" name="email" onChange={(e) => setEmail(e.target.value)}
                         value={email} />
                 </FormControl>
-                <span > {errors.email ? errors.email.message : ''} </span>
+                <span style={{color: 'red'}}> {errors.email ? errors.email.message : ''} </span>
                 <FormControl variant="outlined" style={styles.input}>
                     <InputLabel>Password</InputLabel>
                     <OutlinedInput type="password" name="password" onChange={(e) => setPassword(e.target.value)}
                             value={password} />
                 </FormControl>
-                <span > {errors.password ? errors.password.message : ''} </span>
+                <span style={{color: 'red'}}> {errors.password ? errors.password.message : ''} </span>
                 <FormControl variant="outlined" style={styles.input}>
                     <InputLabel> Confirm Password</InputLabel>
                     <OutlinedInput type="password" name="Confirmpassword" onChange={(e)=> setConfirmPassword(e.target.value)} value={confirmPassword}/>
@@ -150,7 +150,7 @@ export default  (props)=> {
                     <InputLabel>Address</InputLabel>
                     <OutlinedInput type="text" name="address" onChange={(e) => setAddress(e.target.value)} value={address} />
                 </FormControl>
-                <span > {errors.address ? errors.address.message : ''} </span>
+                <span style={{color: 'red'}}> {errors.address ? errors.address.message : ''} </span>
                 <Button type="submit" variant="contained" color="primary">Register
                 </Button>
             </form>
