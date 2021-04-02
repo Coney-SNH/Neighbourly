@@ -36,8 +36,8 @@ export default (props) => {
             .then(res => {
                 console.log(res);
                 if (res.data.errors) {
-                    setErrors(res.data.errors.errors)
-                } else { navigate("/") }
+                    setErrors(res.data.errors)
+                } else { navigate("/homepage") }
             })
             .catch(err => console.log(err))
     }

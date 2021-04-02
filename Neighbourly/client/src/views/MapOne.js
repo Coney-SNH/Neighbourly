@@ -1,6 +1,7 @@
 import React from 'react'
-import { withGoogleMap, GoogleMap, withScriptjs, InfoWindow, Marker, GoogleApiWrapper } from "react-google-maps";
+import { withGoogleMap, GoogleMap, withScriptjs, InfoWindow, Marker, GoogleApiWrapper,  } from "react-google-maps";
 import Geocode from "react-geocode";
+// import Autocomplete from 'react-google-autocomplete';
 Geocode.setApiKey("AIzaSyAKg4xpvUO6EX3FJpOc-CzxfxZw4zbe3uo");
 Geocode.enableDebug();
 class MapOne extends React.Component {
@@ -129,44 +130,56 @@ class MapOne extends React.Component {
       * This Event triggers when the marker window is closed
       *
       * @param event
+     // ********************************************************
+
+     // ***************************************
       */
     onInfoWindowClose = (e) => {
     };
+
     render() {
         const AsyncMap = withScriptjs(
             withGoogleMap(
                 props => (
                     <GoogleMap google={this.props.google}
-                        defaultZoom={this.props.zoom}
-                        defaultCenter={{ lat: this.state.mapPosition.lat, lng: this.state.mapPosition.lng }}
+                    defaultZoom={this.props.zoom}
+                    defaultCenter={{ lat: this.state.mapPosition.lat, lng: this.state.mapPosition.lng }}
                     >
+                        {/* <InfoWindow onClose={this.onInfoWindowClose}>
+                        </InfoWindow> */}
                     </GoogleMap>
                 )
-            )
-        );
-        let map;
-        if (this.props.center.lat !== undefined) {
-            map = <div>
+                )
+                );
+                
+                let map;
+                if (this.props.center.lat !== undefined) {
+                    map = <div>
                 <div>
                     <div className="form-group">
                         <label htmlFor="">City</label>
-                        <input type="text" name="city" className="form-control" onChange={this.onChange} readOnly="readOnly" value={this.state.city} />
+                        <input type="text" name="city" className="form-control" onChange={this.onChange}  defaultValue={this.state.city} />
                     </div>
                     <div className="form-group">
                         <label htmlFor="">Area</label>
-                        <input type="text" name="area" className="form-control" onChange={this.onChange} readOnly="readOnly" value={this.state.area} />
+                                <input type="text" name="area" className="form-control" onChange={this.onChange} defaultValue={this.state.area} />
                     </div>
                     <div className="form-group">
                         <label htmlFor="">State</label>
-                        <input type="text" name="state" className="form-control" onChange={this.onChange} readOnly="readOnly" value={this.state.state} />
+                                <input type="text" name="state" className="form-control" onChange={this.onChange}  defaultValue={this.state.state} />
                     </div>
                     <div className="form-group">
                         <label htmlFor="">Address</label>
-                        <input type="text" name="address" className="form-control" onChange={this.onChange} readOnly="readOnly" value={this.state.address} />
+                                <input type="text" name="address" className="form-control" onChange={this.onChange}  defaultValue={this.state.address} />
+                                {/* <button >Search</button> */}
                     </div>
                 </div>
                 <AsyncMap
-                    googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyDGe5vjL8wBmilLzoJ0jNIwe9SAuH2xS_0&libraries=places"
+                
+                    // googleMapURL= "https://maps.googleapis.com/maps/api/place/findplacefromtext/json?input=Museum%20of%20Contemporary%20Art%20Australia&inputtype=textquery&fields=photos,formatted_address,name,rating,opening_hours,geometry&key=AIzaSyAKg4xpvUO6EX3FJpOc-CzxfxZw4zbe3uo"
+                        // googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKg4xpvUO6EX3FJpOc-CzxfxZw4zbe3uo&ll=47.419731,-122.088715&spn=0.004250,0.011579&t=h&iwloc=A&hl=en"
+                            googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKg4xpvUO6EX3FJpOc-CzxfxZw4zbe3uo&libraries=geometry,drawing,places,address&libraries=places"
+                            // googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyAKg4xpvUO6EX3FJpOc-CzxfxZw4zbe3uo&libraries=places"
                     loadingElement={
                         <div style={{ height: `100%` }} />
                     }
