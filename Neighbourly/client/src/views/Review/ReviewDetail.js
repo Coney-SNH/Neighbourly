@@ -32,7 +32,7 @@ const ReviewCreate = (props) => {
         <div>
             <h1> Details on your review for this user</h1>
             <Link to={`/homepage`}> Home </Link><br />
-                    <p><label htmlFor="name">  Reviewer's Name: {data.reviews.filter(name=> review._id==req.review._id)}</label></p><br />
+                    <p><label htmlFor="name">  Reviewer's Name: {review.name}</label></p><br />
                     <p><label htmlFor="rating" >  User Rating: {review.rating}</label></p><br />
                     <p><label htmlFor="review" >  Review: {review.review}</label></p><br />
         </div>

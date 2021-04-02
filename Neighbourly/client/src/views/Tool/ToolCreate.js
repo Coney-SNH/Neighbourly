@@ -46,7 +46,7 @@ const ToolCreate = (props) => {
                 <input type="text" name="description" onChange={(e) => setDescription(e.target.value)} value={description} /><br />
                 <span> {errors.description ? errors.description.message : ''} </span></p>
                 
-                <p><label htmlFor="price"> Price: </label><br />
+                <p><label htmlFor="price"> Daily Price (in $): </label><br />
                 <input type="number" name="price" onChange={(e) => setPrice(e.target.value)} value={price} /> <br />
                 <span > {errors.price ? errors.price.message : ''} </span></p>
                 

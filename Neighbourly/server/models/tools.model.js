@@ -17,8 +17,8 @@ const ToolSchema = new mongoose.Schema({
     price: {
         type: Number,
         required: [true, "Price is required"],
-        default: 0.01,
-        min: [0.01, "Price must be higher than 1 cent to make this transactional"],
+        default: 1,
+        min: [1, "Price must be higher than 1 dollar to make this transactional"],
     },
 
     startDate: {
