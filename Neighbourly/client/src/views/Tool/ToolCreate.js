@@ -30,7 +30,7 @@ const ToolCreate = (props) => {
     const [endDate, setEndDate] = useState("");
     const [errors, setErrors] = useState({});
     const [user, setUser] = useState({});
-    const { id }=props;
+    const { id } = props;
 
     const onSubmitHandler = (e) => {
         e.preventDefault();

@@ -153,7 +153,6 @@ const Chat = props => {
             <input type="text" name="user" onChange={e => setUser(e.target.value) } placeholder="username"/>
             <input type="text" name="room" placeholder="roomname" onChange={ e => setRoom(e.target.value) }/>
             <button onClick={ joinRoom }>Join Room</button>
-
             <form onSubmit={submitHandler}>
                 <p>{typingStatus}</p>
                 <input type="text" name="message" onChange={ typingHandler } value={message}/>
