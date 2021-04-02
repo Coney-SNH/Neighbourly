@@ -1,6 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import io from 'socket.io-client';
-
+import { makeStyles } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import Button from '@material-ui/core/Button';
+import Typography from '@material-ui/core/Typography';
 import {
     FormControl,
     InputLabel,
@@ -21,23 +26,23 @@ const styles = {
         width: "50%"
     }
 }
+
 const useStyles = makeStyles({
     root: {
-        minWidth: 275,
+      minWidth: 275,
     },
     bullet: {
-        display: 'inline-block',
-        margin: '0 2px',
-        transform: 'scale(0.8)',
+      display: 'inline-block',
+      margin: '0 2px',
+      transform: 'scale(0.8)',
     },
     title: {
-        fontSize: 14,
+      fontSize: 14,
     },
     pos: {
-        marginBottom: 12,
+      marginBottom: 12,
     },
-});
-
+  });
 
 const Chat = props => {
     const { id } = props;
@@ -54,51 +59,51 @@ const Chat = props => {
     useEffect(() => {
         return () => socket.disconnect(true);
     }, [])
-
+  
     socket.on('messageSent', data => {
-        setMessages([...messages, data]);
-        setTypingStatus('');
+      setMessages([...messages, data]);
+      setTypingStatus('');
     })
-
+  
     socket.on('clientTyping', data => {
-        setTypingStatus(data.message);
+      setTypingStatus(data.message);
     })
-
+  
     const submitHandler = e => {
-        e.preventDefault();
-
-        socket.emit('sendMessage', { room, user, message });
-        setMessages([...messages, { room, user, message }])
-        setTypingStatus('');
-        setMessage('');
+      e.preventDefault();
+      
+      socket.emit('sendMessage', { room, user, message });
+      setMessages([...messages, { room, user, message }])
+      setTypingStatus('');
+      setMessage('');
     }
-
+  
     const typingHandler = e => {
-        setMessage(e.target.value);
-        socket.emit('clientTyping', { room, message: `${user} is typing...` });
+      setMessage(e.target.value);
+      socket.emit('clientTyping', { room, message: `${user} is typing...`});
     }
-
+  
     const joinRoom = () => {
         socket.emit('joinroom', room);
         setStartChat(true);
     }
     return (
         <>
-            {startChat ?
-                <>
-                    <Card className={classes.root} variant="outlined">
-                        <CardContent>
-                            <Typography className={classes.title} color="textSecondary" gutterBottom>
-                                {typingStatus}
-                            </Typography>
-                            <div>
-                                {
-                                    messages.map((item, i) =>
-                                        <Typography variant="body2" component="p" key={i}>{item.user}: {item.message}</Typography>
-                                    )
-                                }
-                            </div>
-                            {/* {
+        {startChat ? 
+        <>
+        <Card className={classes.root} variant="outlined">
+            <CardContent>
+                <Typography className={classes.title} color="textSecondary" gutterBottom>
+                {typingStatus}
+                </Typography>
+                <div>
+                {
+                    messages.map( (item, i) => 
+                    <Typography variant="body2" component="p" key={i}>{item.user}: {item.message}</Typography>
+                    )
+                }
+            </div>
+                {/* {
                     messages.map( (item, i) => { 
                         <div key={i}>
                         <Typography className={classes.pos} color="textSecondary">
@@ -108,30 +113,30 @@ const Chat = props => {
                         </div>
                     })
                 } */}
-                        </CardContent>
-                        <CardActions>
-                        </CardActions>
-                        <div elevation={1} style={styles.paper}>
-                        </div>
-                    </Card>
-                    <form onSubmit={submitHandler}>
-                        <FormControl variant="outlined" onSubmit={submitHandler} style={styles.input}>
-                            <TextField id="outlined-basic" label="Message" variant="outlined" type="text" name="message" onChange={typingHandler} value={message} />
-                            <Button type="submit" variant="contained" color="primary">
-                                Send
+            </CardContent>
+        <CardActions>
+        </CardActions>
+        <div elevation={1} style={styles.paper}>
+        </div>
+    </Card>
+        <form onSubmit={submitHandler}>
+            <FormControl variant="outlined" onSubmit={ submitHandler} style={styles.input}>
+                <TextField id="outlined-basic" label="Message" variant="outlined" type="text" name="message" onChange={typingHandler} value={message}/>
+                <Button type="submit" variant="contained" color="primary">
+                    Send
                 </Button>
-                        </FormControl>
-                    </form>
-                </>
-                :
-                <FormControl>
-                    <OutlinedInput type="text" name="user" onChange={e => setUser(e.target.value)} placeholder="username" />
-                    <Button onClick={joinRoom} variant="contained" color="primary">
+            </FormControl>
+        </form>
+        </>
+        :
+        <FormControl>
+            <OutlinedInput type="text" name="user" onChange={e => setUser(e.target.value) } placeholder="username"/>
+            <Button onClick={ joinRoom } variant="contained" color="primary">
                         Start Chat
             </Button>
-                </FormControl>
-            }
-            {/* <input type="text" name="username" onChange={e => setUsername(e.target.value) } placeholder="username"/>
+        </FormControl>
+        }
+        {/* <input type="text" name="username" onChange={e => setUsername(e.target.value) } placeholder="username"/>
         <form onSubmit={ submitHandler }>
         <p>{typingStatus}</p>
                 <input type="text" name="message" onChange={ typingHandler } value={ message }/>

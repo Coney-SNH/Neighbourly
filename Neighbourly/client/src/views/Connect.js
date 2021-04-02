@@ -29,12 +29,11 @@ const Connect = (props) => {
             .catch(err => console.log(err.message))
     }, []);
 
-
     return (
         <div>
             <Button color="primary" variant="outlined" onClick={e => navigate(`/homepage`)}>Home</Button>
             <h3>Send a Message to {user.firstName} {user.lastName}</h3>
-            <Chat id={id} />
+            <Chat id={id}/>
         </div>
     )
 }

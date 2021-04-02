@@ -57,36 +57,36 @@ const ToolCreate = (props) => {
             <Button color="primary" variant="outlined" onClick={e => navigate(`/homepage`)}>Home</Button>
             <h3> Create a tool for rental! </h3>
             <div elevation={1} style={styles.paper}>
-                <form onSubmit={onSubmitHandler} >
-                    <FormControl variant="outlined" style={styles.input}>
-                        <InputLabel>Type</InputLabel>
-                        <OutlinedInput type="text" name="type" onChange={(e) => setType(e.target.value)} value={type} />
-                        <span> {errors.type ? errors.type.message : ''} </span>
-                    </FormControl>
-                    <FormControl variant="outlined" style={styles.input}>
-                        <InputLabel>Description</InputLabel>
-                        <OutlinedInput type="text" name="description" onChange={(e) => setDescription(e.target.value)} value={description} />
-                        <span> {errors.description ? errors.description.message : ''} </span>
-                    </FormControl>
-                    <FormControl variant="outlined" style={styles.input}>
-                        <InputLabel>Daily Price (in $)</InputLabel>
-                        <OutlinedInput type="number" name="price" onChange={(e) => setPrice(e.target.value)} value={price} />
-                        <span> {errors.price ? errors.price.message : ''} </span>
-                    </FormControl>
-                    <FormControl variant="outlined" style={styles.input}>
-                        <span>When will the tool be available:</span>
-                        <OutlinedInput type="date" name="startDate" onChange={(e) => setStartDate(e.target.value)} value={startDate} />
-                        <span> {errors.startDate ? errors.startDate.message : ''} </span>
-                    </FormControl>
-                    <FormControl variant="outlined" style={styles.input}>
-                        <span>When will you need the tool back by:</span>
-                        <OutlinedInput type="date" name="endDate" onChange={(e) => setEndDate(e.target.value)} value={endDate} />
-                        <span> {errors.endDate ? errors.endDate.message : ''} </span>
-                    </FormControl>
-                    <Button type="submit" variant="contained" color="primary">
-                        Add New Tool
+            <form onSubmit={onSubmitHandler} >
+                <FormControl variant="outlined" style={styles.input}>
+                    <InputLabel>Type</InputLabel>
+                    <OutlinedInput type="text" name="type" onChange={(e) => setType(e.target.value)} value={type}/>
+                <span> {errors.type ? errors.type.message : ''} </span>
+                </FormControl>
+                <FormControl variant="outlined" style={styles.input}>
+                    <InputLabel>Description</InputLabel>
+                    <OutlinedInput type="text" name="description" onChange={(e) => setDescription(e.target.value)} value={description}/>
+                    <span> {errors.description ? errors.description.message : ''} </span>
+                </FormControl>
+                <FormControl variant="outlined" style={styles.input}>
+                    <InputLabel>Daily Price (in $)</InputLabel>
+                    <OutlinedInput type="number" name="price" onChange={(e) => setPrice(e.target.value)} value={price}/>
+                    <span> {errors.price ? errors.price.message : ''} </span>
+                </FormControl>
+                <FormControl variant="outlined" style={styles.input}>
+                    <span>When will the tool be available:</span>
+                    <OutlinedInput type="date" name="startDate" onChange={(e) => setStartDate(e.target.value)} value={startDate}/>
+                    <span> {errors.startDate ? errors.startDate.message : ''} </span>
+                </FormControl>
+                <FormControl variant="outlined" style={styles.input}>
+                    <span>When will you need the tool back by:</span>
+                    <OutlinedInput type="date" name="endDate" onChange={(e) => setEndDate(e.target.value)} value={endDate}/>
+                    <span> {errors.endDate ? errors.endDate.message : ''} </span>
+                </FormControl>
+                <Button type="submit" variant="contained" color="primary">
+                    Add New Tool
                 </Button>
-                </form>
+            </form>
             </div>
         </div>
     )
